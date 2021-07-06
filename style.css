@@ -1,0 +1,816 @@
+/* TODO Another color palette */
+/* TODO Rewrite on SCSS */
+
+
+/* =======================
+        CORE STUFF
+========================== */
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    color: hsl(240, 8%, 58%);
+    font-size: 10px;
+    font-family: sans-serif;
+
+    scrollbar-width: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: hsl(250, 26%, 9%);
+}
+
+header {
+    width: 90%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#main_container { 
+    width: 95%;
+    height: 590px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative; 
+}
+
+
+/* =======================
+         STICKERS 
+========================== */
+#stickers {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.sticker {
+    width: 160px;
+    min-width: 160px;
+    height: 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: none;
+    border-radius: 10px;
+    background-color: hsl(240, 8%, 58%);
+    box-shadow: -2px 2px 10px #000;
+    transition: .1s linear;
+    overflow: hidden;
+}
+
+.sticker:hover {
+    color: hsl(240, 8%, 58%);
+    background-color: hsl(251.3, 26.7%, 11.8%);
+}
+
+.sticker:not(:last-child):hover {
+    transform: translate(-15px, 0);
+}
+
+.sticker:hover~.sticker {
+    transform: translate(100px, 0)
+}
+
+.sticker:not(:first-child) {
+    margin: 0 0 0 -110px;
+}
+
+.sticker__header {
+    width: 100%;
+    margin: 10px 0 0 0;
+    display: flex;
+    align-items: center;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sticker__date {
+    width: auto;
+    height: 18px;
+    margin: 0 0 0 5px;
+
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: hsl(251.3, 26.7%, 11.8%);
+}
+
+.sticker__delete {
+    width: 18px;
+    margin: 0 5px 0 0;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.sticker__delete svg {
+    fill: hsl(250, 26%, 9%);
+    pointer-events: none;
+}
+
+.sticker__name {
+    width: 90%;
+    height: auto;
+    margin: 5px 0 0 0;
+
+    font-size: 1.4rem;
+    color: hsl(251.3, 26.7%, 11.8%);
+    user-select: none;
+}
+
+.sticker:hover .sticker__name,
+.sticker:hover .sticker__header .sticker__date,
+.sticker:hover .sticker__header .sticker__delete {
+    color: hsl(240, 8%, 58%);
+}
+
+.sticker:hover .sticker__header .sticker__delete svg {
+    fill: hsl(240, 8%, 58%);
+}
+
+
+/* =========STICKER READER========== */
+#sticker__reader {
+    width: 415px;
+    height: 590px;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(251.3, 26.7%, 11.8%);
+    box-shadow: 2px 2px 25px black;
+}
+
+.sticker-reader__header {
+    width: 100%;
+    height: auto;
+    padding: 0 25px;
+    margin: 40px 0 20px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sticker-reader__header:hover svg {
+    opacity: 100%;
+}
+
+.sticker-reader__title {
+    width: 350px;
+    height: auto;
+    
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+.edit__sticker-reader__title {
+    width: 25px;
+    height: 25px;
+
+    align-self: flex-start;
+
+    border: none;
+    background-color: transparent;
+    transition: .1s;
+    cursor: pointer;
+}
+
+.edit__sticker-reader__title svg {
+    fill:hsl(247, 11%, 32%);
+    opacity: 0%;
+    transition: .1s;
+    pointer-events: none;
+}
+
+.edit__sticker-reader__title:hover svg {
+    fill: hsl(240, 8%, 58%);
+}
+
+.task__list {
+    width: 300px;
+    height: auto;
+    margin: 0 0 25px 0;
+
+}
+
+.task {
+    display: flex;
+    margin: 10px 0 0 0;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.task:hover svg {
+    opacity: 100%;
+}
+
+.task li {
+    margin: 0 auto 0 0;
+    font-size: 1.6rem;
+    transition: .2s linear;
+}
+
+.task__edit, .task__delete {
+    width: 20px;
+    height: 20px;
+    margin: 0 3px 0 0;
+    
+    border: none;
+    background-color: transparent;
+    transition: .1s;
+    cursor: pointer;
+}
+
+.task__edit svg, .task__delete svg {
+    fill:hsl(247, 11%, 32%);
+    opacity: 0%;
+    transition: .1s;
+    pointer-events: none;
+}
+
+.task__edit:hover svg, .task__delete:hover svg {
+    fill:hsl(240, 8%, 58%);
+}
+
+.sticker-reader__buttons {
+    width: 100%;
+    margin: auto 10px 30px 10px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.sticker-reader-back__button {
+    margin: 0 0 0 20px;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.add__task {
+    width: 80px;
+    height: 30px;
+    margin: 0 20px 0 0;
+
+    font-size: 1.4rem;
+    border: none;
+    background-color:hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.add__task:hover {
+    color: hsl(250, 26%, 9%);
+    background-color: hsl(247, 11%, 32%);
+}
+
+.checked {
+    color: hsl(227, 23%, 31%);
+    text-decoration: line-through;
+    opacity: 50%;
+}
+
+/* =======STICKER EDITOR======== */
+.task-editor__area {
+    width: 300px;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.task-editor__field {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    margin: 10px 0 5px 0;
+
+    font-size: 1.6rem;
+    background-color:hsl(250, 26%, 9%);
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.task-editor__button {
+    width: 80px;
+    height: 30px;
+
+    align-self: flex-end;
+    
+    font-size: 1.4rem;
+    border: none;
+    background-color:hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.task-editor__button:hover {
+    background-color:hsl(247, 11%, 32%);
+}
+
+/* =======================
+        NOTES SECTION
+========================== */
+#note__field {
+    width: 810px;
+    height: 590px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+#notebook {
+    width: 100%;
+    height: 420px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: hsl(251.3, 26.7%, 11.8%);
+    box-shadow: 2px 2px 25px black;
+}
+
+/* =========NOTEBOOK HEADER======= */
+#notebook__header {
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid hsl(227, 23%, 31%);
+}
+
+#counter {
+    width: auto;
+    height: 42px;
+    margin: 0 0 0 15px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 1.2rem;
+    color: hsl(227, 23%, 31%);
+}
+
+#notebook__header button {
+    height: 42px;
+    margin: 0 15px 0 0;
+
+    display: flex;
+    align-items: center;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#filter {
+    width: 30px;
+    height: 30px;
+}
+
+/* ==========NOTES======== */
+#notebook__table {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#notebook__placeholder {
+    font-size: 3rem;
+    display: flex;
+    align-self: center;
+}
+
+.note {
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    border-bottom: 1px solid hsl(227, 23%, 31%);
+    transition: .1s linear;
+}
+
+.note:hover {
+    background-color: hsl(247, 11%, 32%);
+}
+
+.note__title {
+    width: 50%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+
+}
+
+.note__counter {
+    width: 18px;
+    height: 18px;
+    margin: 0 15px 0 15px;
+
+    align-self: flex-end;
+
+    font-size: 1.2rem;
+    font-weight: 400;
+    border-radius: 50%;
+}
+
+.note__inner-title {
+    width: 300px;
+    height: auto;
+
+    font-size: 1.8rem;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
+.note__date {
+    width: 85px;
+    height: auto;
+
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+
+/* ======NOTES BUTTONS========= */
+.note__buttons {
+    margin-right: 15px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.note__buttons button {
+    width: 25px;
+    height: 25px;
+
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.note__buttons button:hover {
+    border-radius: 3px;
+    background-color: hsl(240, 8%, 58%);
+}
+
+.note__buttons button svg {
+    pointer-events: none;
+}
+
+.note__buttons button:hover svg {
+    fill: hsl(250, 26%, 9%);
+}
+
+/* =========NOTE READER======== */
+#adder__reader {
+    width: 415px;
+    height: 590px;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(251.3, 26.7%, 11.8%);
+}
+
+#reader__title {
+    width: 350px;
+    height: auto;
+    max-height: 100px;
+    padding: 5px;
+    margin: 40px 0 20px 0;
+
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+#reader__text {
+    width: 350px;
+    height: 400px;
+    margin: 0 0 25px 0;
+
+    font-size: 1.7rem;
+
+    overflow-y: auto;
+    white-space: pre-line;
+    scrollbar-width: thin;
+}
+
+.reader__button {
+    align-self: flex-start;
+    margin: auto 0 30px 32.5px;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+/* =======================
+        INPUT SECTION
+========================== */
+#adder__default {
+    width: 415px;
+    height: 420px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: hsl(251.3, 26.7%, 11.8%);
+    transition: .5s linear;
+    box-shadow: 2px 2px 25px black;
+}
+
+#adder h2 {
+    margin: 55px 0 55px 0;
+
+    font-size: 3.5rem;
+    font-weight: 100;
+    text-align: center;
+}
+
+#adder__default-buttons {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+}
+
+#adder__default-buttons button {
+    width: 170px;
+    height: 130px;
+    
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+#adder__default-buttons button:hover {
+    background-color: hsl(247, 11%, 32%);
+}
+
+#button__note {
+    margin-right: 7.5px;
+}
+
+#button__sticker {
+    margin-left: 7.5px;
+}
+
+/* ==========NOTE ADDER========== */
+#adder__noter {
+    width: 415px;
+    height: 590px;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(251.3, 26.7%, 11.8%);
+    box-shadow: 2px 2px 25px black;
+}
+
+.title {
+    width: 350px;
+    height: 45px;
+    padding: 5px;
+    margin: 40px 0 15px 0;
+
+    display: flex;
+
+    font-size: 2rem;
+    border: none;
+    background-color: hsl(250, 26%, 9%);
+    outline: none;
+}
+
+.textarea {
+    width: 350px;
+    height: 400px;
+    padding: 5px;
+
+    font-size: 1.7rem;
+    border: none;
+    background-color: hsl(250, 26%, 9%);
+    resize: none;
+    outline: none;
+}
+
+.noter__buttons {
+    width: 350px;
+    height: auto;
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back__button {
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background-color: transparent;
+
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.add__button {
+    width: 200px;
+    height: 40px;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color:hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.add__button:hover {
+    background-color: hsl(247, 11%, 32%);
+}
+
+.edit__button {
+    width: 200px;
+    height: 40px;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color:hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.edit__button:hover {
+    background-color: hsl(247, 11%, 32%);
+}
+
+
+/* =======STICKER ADDER======== */
+#adder__sticker {
+    width: 415px;
+    height: 590px;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(251.3, 26.7%, 11.8%);
+    box-shadow: 2px 2px 25px black;
+}
+
+.sticker__title {
+    width: 350px;
+    height: 45px;
+    padding: 0 5px;
+    margin: 40px 0 15px 0;
+
+    display: flex;
+
+    font-size: 2rem;
+    border: none;
+    background-color: hsl(250, 26%, 9%);
+    outline: none;
+}
+
+.sticker__list {
+    width: 300px;
+    height: auto;
+
+}
+
+.sticker__list li {
+    margin: 10px 0 0 0;
+    font-size: 1.6rem;
+    transition: .2s linear;
+}
+
+.sticker__text {
+    width: 350px;
+    height: 30px;
+    padding: 0 5px; 
+    margin: 25px 0 5px 0;
+
+    display: flex;
+
+    font-size: 1.6rem;
+    border: none;
+    background-color: hsl(250, 26%, 9%);
+    outline: none;
+    resize: none;
+}
+
+.create__task {
+    width: 80px;
+    height: 30px;
+    margin: 0 32.5px 0 0;
+
+    align-self: flex-end;
+
+    font-size: 1.4rem;
+    border: none;
+    background-color:hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.create__task:hover {
+    background-color:hsl(247, 11%, 32%);
+}
+
+.stickers__buttons {
+    width: 350px;
+    height: auto;
+    margin: auto 0 30px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sticker-back__button {
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background-color: transparent;
+
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.add-sticker__button {
+    width: 200px;
+    height: 40px;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color:hsl(250, 26%, 9%);
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.add-sticker__button:hover {
+    background-color: hsl(247, 11%, 32%);
+}
+
