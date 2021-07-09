@@ -2,6 +2,7 @@ import { notebookTable, counter } from "./notes.js";
 import { STICKERS } from "./stickers.js";
 
 export const localStorageUpdate = {
+    
      notesRefresh() {
          if(!localStorage.getItem('notes')) {
              return localStorage.setItem('notes', JSON.stringify([]));

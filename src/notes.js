@@ -31,172 +31,167 @@ export const readerBackButton = document.querySelector('.reader__button');
 //=============================================================
 
 
-// ADD NEW NOTE
-export function add_note() {
-     let newDate = new Date();
-     let day = newDate.getDate();
-     let month = newDate.getMonth() + 1;
-     let year = newDate.getFullYear();
+
+export const notesController = {
+    
+    add_note() {
+        let newDate = new Date();
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
  
-     if(day.toString().length != 2) {
-         day = `0${day}`;
-     };
+        if(day.toString().length != 2) {
+            day = `0${day}`;
+        };
  
-     if(month.toString().length != 2) {
-         month = `0${month}`;
-     }
+        if(month.toString().length != 2) {
+            month = `0${month}`;
+        }
  
-     let noteDate = `${day}:${month}:${year}`;
+        let noteDate = `${day}:${month}:${year}`;
  
-     if(adderTitle.value && adderText.value) {
-         let tempObj = JSON.parse(localStorage.getItem('notes'));
+        if(adderTitle.value && adderText.value) {
+            let tempObj = JSON.parse(localStorage.getItem('notes'));
          
-         let storageObj = {
-             id: tempObj.length + 1,
-             title: adderTitle.value, 
-             text: adderText.value, 
-             date: noteDate,
-         };
+            let storageObj = {
+                id: tempObj.length + 1,
+                title: adderTitle.value, 
+                text: adderText.value, 
+                date: noteDate,
+            };
  
-         tempObj.push(storageObj);
-         localStorage.setItem('notes', JSON.stringify(tempObj));
+            tempObj.push(storageObj);
+            localStorage.setItem('notes', JSON.stringify(tempObj));
  
-         localStorageUpdate.notesRefresh();
+            localStorageUpdate.notesRefresh();
  
-         adderTitle.value = '';
-         adderText.value = '';
-         noteAdder.style.display = 'none';
-         defaultAdder.style.display = 'flex';
-     }
- };
+            adderTitle.value = '';
+            adderText.value = '';
+            noteAdder.style.display = 'none';
+            defaultAdder.style.display = 'flex';
+        };
+    },
 
-
- // NOTE EVENTS
- //=========================
-
-/* NOTE ORDER CHANGE */
-export function note__orderChange(_event) {
-     let note = _event.target.closest('.note');
-     let tempObj = JSON.parse(localStorage.getItem('notes'));
+    
+    read__note(_event) {
+        let note = _event.target.closest('.note');
+        let tempObj = JSON.parse(localStorage.getItem('notes'));
+         
+        for(let obj of tempObj) {
+            if(`index-${obj.id}` === note.id) {
  
-     if(_event.target.className === 'up') {
-         tempObj.forEach(obj => {
-             if(`index-${obj.id}` === note.id && obj.id !== 1) {
-                 tempObj[obj.id - 2].id = obj.id;
-                 obj.id = obj.id - 1;
+                Object.values(ADDER.children).forEach(field => {
+                    if(field.id != 'adder__reader') {
+                        field.style.display = 'none';
+                    };
+                });
  
-                 tempObj.sort((a, b) => b.id < a.id);
+                noteReader.style.display = 'flex';
+                readerTitle.textContent = obj.title;
+                readerText.textContent = obj.text;
+            };
+        };
+    },
+
+   
+    note__orderChange(_event) {
+        let note = _event.target.closest('.note');
+        let tempObj = JSON.parse(localStorage.getItem('notes'));
+ 
+        if(_event.target.className === 'up') {
+            tempObj.forEach(obj => {
+                if(`index-${obj.id}` === note.id && obj.id !== 1) {
+                    tempObj[obj.id - 2].id = obj.id;
+                    obj.id = obj.id - 1;
+ 
+                    tempObj.sort((a, b) => b.id < a.id);
                  
-                 localStorage.setItem('notes', JSON.stringify(tempObj));
-                 localStorageUpdate.notesRefresh();
-             }
-         });
+                    localStorage.setItem('notes', JSON.stringify(tempObj));
+                    localStorageUpdate.notesRefresh();
+                }
+            });
  
-     } else if(_event.target.className === 'down') {
-         tempObj.forEach(obj => {
-             if(`index-${obj.id}` === note.id && obj.id !== tempObj.length) {
-                 tempObj[obj.id].id = obj.id;
-                 obj.id = obj.id + 1;
+        } else if(_event.target.className === 'down') {
+            tempObj.forEach(obj => {
+                if(`index-${obj.id}` === note.id && obj.id !== tempObj.length) {
+                    tempObj[obj.id].id = obj.id;
+                    obj.id = obj.id + 1;
  
-                 tempObj.sort((a, b) => b.id < a.id);
+                    tempObj.sort((a, b) => b.id < a.id);
                  
-                 localStorage.setItem('notes', JSON.stringify(tempObj));
-                 localStorageUpdate.notesRefresh();
-             }
-         });
-     }
- };
+                    localStorage.setItem('notes', JSON.stringify(tempObj));
+                    localStorageUpdate.notesRefresh();
+                }
+            });
+        };
+    },
 
-
-/* EDIT NOTE */
-export function edit__note(_event) {
-     let note = _event.target.closest('.note');
-     let tempObj = JSON.parse(localStorage.getItem('notes'));
+    edit__note(_event) {
+        let note = _event.target.closest('.note');
+        let tempObj = JSON.parse(localStorage.getItem('notes'));
  
-     for(let obj of tempObj) {
-         if(`index-${obj.id}` === note.id) {
-             adderTitle.value = obj.title;
-             adderText.value = obj.text;
+        for(let obj of tempObj) {
+            if(`index-${obj.id}` === note.id) {
+                adderTitle.value = obj.title;
+                adderText.value = obj.text;
  
-             Object.values(ADDER.children).forEach(field => {
-                 if(field.id != 'adder__noter') {
-                     field.style.display = 'none';
-                 };
-             });
+                Object.values(ADDER.children).forEach(field => {
+                    if(field.id != 'adder__noter') {
+                        field.style.display = 'none';
+                    };
+                });
              
-             addButton.style.display = 'none';
-             editButton.style.display = 'flex';
+                addButton.style.display = 'none';
+                editButton.style.display = 'flex';
  
-             noteAdder.style.display = 'flex';
+                noteAdder.style.display = 'flex';
  
-             editButton.onclick =  function() {
-                 obj.title = adderTitle.value;
-                 obj.text = adderText.value;
+                editButton.onclick =  function() {
+                     obj.title = adderTitle.value;
+                     obj.text = adderText.value;
  
-                 adderTitle.value = '';
-                 adderText.value = '';
+                     adderTitle.value = '';
+                     adderText.value = '';
  
-                 noteAdder.style.display = 'none';
-                 defaultAdder.style.display = 'flex';
- 
-                 editButton.style.display = 'none';
-                 addButton.style.display = 'flex';
- 
-                 localStorage.setItem('notes', JSON.stringify(tempObj));
-                 localStorageUpdate.notesRefresh();
-             }
-         }
-     }
- }
-
-
-/* DELETE NOTE */
-export function delete__note(_event) {
-     let approve = confirm('Are you sure?');
- 
-     if(approve) {
-         let note = _event.target.closest('.note');
-         let tempObj = JSON.parse(localStorage.getItem('notes'));
- 
-         tempObj.forEach(obj => {
-             if(`index-${obj.id}` === note.id) {
-                 tempObj.splice(obj.id - 1, 1);
- 
-                 for(let i = 0; i <= tempObj.length; i++) {
-                     if(!tempObj[i]) continue;
-                     tempObj[i].id = i + 1;
-                 };
- 
-                 if(noteReader.style.display != 'none') {
-                     noteReader.style.display = 'none';
+                     noteAdder.style.display = 'none';
                      defaultAdder.style.display = 'flex';
-                 };
  
-                 localStorage.setItem('notes', JSON.stringify(tempObj));
-                 localStorageUpdate.notesRefresh();
-             };
-         })
-     }
- }
+                    editButton.style.display = 'none';
+                    addButton.style.display = 'flex';
+ 
+                    localStorage.setItem('notes', JSON.stringify(tempObj));
+                    localStorageUpdate.notesRefresh();
+                }
+            }
+        }
+    },
 
+    delete__note(_event) {
+        let approve = confirm('Are you sure?');
+ 
+        if(approve) {
+            let note = _event.target.closest('.note');
+            let tempObj = JSON.parse(localStorage.getItem('notes'));
+ 
+            tempObj.forEach(obj => {
+                if(`index-${obj.id}` === note.id) {
+                    tempObj.splice(obj.id - 1, 1);
+ 
+                    for(let i = 0; i <= tempObj.length; i++) {
+                        if(!tempObj[i]) continue;
+                        tempObj[i].id = i + 1;
+                    };
+ 
+                    if(noteReader.style.display != 'none') {
+                        noteReader.style.display = 'none';
+                        defaultAdder.style.display = 'flex';
+                    };
+ 
+                    localStorage.setItem('notes', JSON.stringify(tempObj));
+                    localStorageUpdate.notesRefresh();
+                };
+            })
+        }
+    },
+};
 
- /* READ NOTE */
-export function read__note(_event) {
-     let note = _event.target.closest('.note');
-     let tempObj = JSON.parse(localStorage.getItem('notes'));
-         
-         for(let obj of tempObj) {
-             if(`index-${obj.id}` === note.id) {
- 
-                 Object.values(ADDER.children).forEach(field => {
-                     if(field.id != 'adder__reader') {
-                         field.style.display = 'none';
-                     };
-                 });
- 
-                 noteReader.style.display = 'flex';
-                 readerTitle.textContent = obj.title;
-                 readerText.textContent = obj.text;
-             };
-         };
- };

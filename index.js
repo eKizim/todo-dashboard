@@ -37,17 +37,14 @@ newNoteButton.addEventListener('click', () => {
 //================================
 //        NOTEBOOK
 //================================
-import { notebookTable } from './src/notes.js';
-
+import { notebookTable, notesController } from './src/notes.js';
 
 /*==============  CREATE A NEW NOTE ================ */
-import { addButton, add_note } from './src/notes.js';
+import { addButton } from './src/notes.js';
 
-addButton.addEventListener('click', add_note);
+addButton.addEventListener('click', notesController.add_note);
 
 /* ================ NOTE EVENTS =============== */
-import { note__orderChange, edit__note, delete__note, read__note } from './src/notes.js';
-
 notebookTable.addEventListener('click', (event) => {
     let note = event.target.closest('.note');
 
@@ -55,18 +52,18 @@ notebookTable.addEventListener('click', (event) => {
     if(!notebookTable.contains(note)) return;
 
     if(event.target.className === 'up' || event.target.className === 'down') {
-        return note__orderChange(event)
+        return notesController.note__orderChange(event);
     };
 
     if(event.target.className === 'edit') {
-        return edit__note(event)
+        return notesController.edit__note(event);
     };
 
     if(event.target.className === 'trash') {
-        return delete__note(event)
+        return notesController.delete__note(event);
     };
 
-    return read__note(event);
+    return notesController.read__note(event);
     }
 );
 
