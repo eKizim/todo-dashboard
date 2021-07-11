@@ -11,7 +11,7 @@ export {ADDER, defaultAdder}
 //================================
 //   LOCAL STORAGE REFRESH
 //================================
-import { localStorageUpdate } from './src/storage.js';
+import { localStorageUpdate } from './storage.js';
 
 localStorageUpdate.notesRefresh();
 localStorageUpdate.stickersRefresh();
@@ -20,8 +20,8 @@ localStorageUpdate.stickersRefresh();
 //================================
 //  OPEN STICKER OR NOTE CREATOR
 //================================
-import { noteAdder } from './src/notes.js';
-import { stickerAdder } from './src/stickers.js';
+import { noteAdder } from './notes.js';
+import { stickerAdder } from './stickers.js';
 
 newNoteButton.addEventListener('click', () => {
      defaultAdder.style.display = 'none';
@@ -37,12 +37,12 @@ newNoteButton.addEventListener('click', () => {
 //================================
 //        NOTEBOOK
 //================================
-import { notebookTable, notesController } from './src/notes.js';
+import { notebookTable, Notes_Controller } from './notes.js';
 
 /*==============  CREATE A NEW NOTE ================ */
-import { addButton } from './src/notes.js';
+import { addButton } from './notes.js';
 
-addButton.addEventListener('click', notesController.add_note);
+addButton.addEventListener('click', Notes_Controller.add_note);
 
 /* ================ NOTE EVENTS =============== */
 notebookTable.addEventListener('click', (event) => {
@@ -52,26 +52,26 @@ notebookTable.addEventListener('click', (event) => {
     if(!notebookTable.contains(note)) return;
 
     if(event.target.className === 'up' || event.target.className === 'down') {
-        return notesController.note__orderChange(event);
+        return Notes_Controller.note__orderChange(event);
     };
 
     if(event.target.className === 'edit') {
-        return notesController.edit__note(event);
+        return Notes_Controller.edit__note(event);
     };
 
     if(event.target.className === 'trash') {
-        return notesController.delete__note(event);
+        return Notes_Controller.delete__note(event);
     };
 
-    return notesController.read__note(event);
+    return Notes_Controller.read__note(event);
     }
 );
 
 
 /* ================ NOTE EVENTS =============== */
-import { readerBackButton, backButton, noteReader, editButton } from './src/notes.js';
+import { readerBackButton, backButton, noteReader, editButton } from './notes.js';
 
-/* FIXME -- Make general button or button creator */
+/* FIX -- Make general button or button creator */
 
 readerBackButton.addEventListener('click', () => {
     noteReader.style.display = 'none';
@@ -101,19 +101,19 @@ backButton.addEventListener('click', () => {
 
 
 /* ================ CREATE A NEW STICKER =============== */
-import { addStickerButton, add_sticker } from './src/stickers.js';
+import { addStickerButton, add_sticker } from './stickers.js';
 
 addStickerButton.addEventListener('click', add_sticker);
 
 
 /* ================ CREATE STICKER TASK =============== */
-import { createTaskButton, addNewTask } from './src/stickers.js';
+import { createTaskButton, addNewTask } from './stickers.js';
 
 createTaskButton.addEventListener('click', addNewTask);
 
 
 /* ============= STICKER BACK BUTTON AND CLEANING ===================*/ 
-import { stickerReader, stickerTitle, stickerList, stickerText, stickerBackButton, stickerReaderButton } from './src/stickers.js';
+import { stickerReader, stickerTitle, stickerList, stickerText, stickerBackButton, stickerReaderButton } from './stickers.js';
 
 /* FIXME -- Make general button or button creator */
 stickerBackButton.addEventListener('click', () => {
@@ -135,7 +135,7 @@ stickerReaderButton.addEventListener('click', () => {
 });
 
 /* ============== STICKER EVENTS ================ */
-import { STICKERS, delete__sticker, read__sticker } from './src/stickers.js';
+import { STICKERS, delete__sticker, read__sticker } from './stickers.js';
 
 STICKERS.addEventListener('click', (event) => {
     let sticker = event.target.closest('.sticker');
@@ -150,7 +150,7 @@ STICKERS.addEventListener('click', (event) => {
 
 
 /* ============EDIT STICKER TITLE ============== */
-import {editStickerReaderTitle, edit__stickerTitle} from './src/stickers.js';
+import {editStickerReaderTitle, edit__stickerTitle} from './stickers.js';
 
 editStickerReaderTitle.addEventListener('click', (event) => {
     return edit__stickerTitle(event);
@@ -158,7 +158,7 @@ editStickerReaderTitle.addEventListener('click', (event) => {
 
 
 /* ============= STICKER TASK EVENTS =============== */
-import { taskList, stickerTaskEdit, stickerTaskDelete, stickerReaderTitle } from './src/stickers.js';
+import { taskList, stickerTaskEdit, stickerTaskDelete, stickerReaderTitle } from './stickers.js';
 
 taskList.addEventListener('click', (event) => {
     let task = event.target.closest('.task');
@@ -260,6 +260,7 @@ addTask.addEventListener('click', () => {
 
 
 
+//######################################################################
 
 /* TODO -- Notes placeholder; */
 /* TODO -- Field cleaner on page load/reload */
@@ -267,3 +268,5 @@ addTask.addEventListener('click', () => {
 
 /* FIX -- Rebuild separate functions to object or class and make code cleaner */
 /* FIX -- Rename Vars and Funcs */
+
+//######################################################################

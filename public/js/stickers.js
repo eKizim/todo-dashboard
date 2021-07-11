@@ -2,7 +2,7 @@
 //         IMPORTS
 //================================
 import { localStorageUpdate } from './storage.js';
-import { ADDER, defaultAdder } from '../index.js';
+import { ADDER, defaultAdder } from './index.js';
 
 // STICKER FIELD
 export const STICKERS = document.querySelector('#stickers');

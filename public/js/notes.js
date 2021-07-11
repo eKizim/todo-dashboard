@@ -2,7 +2,7 @@
 //         IMPORTS
 //================================
 import { localStorageUpdate } from './storage.js';
-import { ADDER, defaultAdder } from '../index.js';
+import { ADDER, defaultAdder } from './index.js';
 //=============================================================
 
 // NOTEBOOK
@@ -12,7 +12,7 @@ export const counter = document.querySelector('#counter');
 /* ==========NOTE BUTTONS========== */
 const upButtons = document.querySelectorAll('.up');
 const downButtons = document.querySelectorAll('.down');
-const editButtons = document.querySelectorAll('.edit');
+const editNoteButtons = document.querySelectorAll('.edit');
 const trashButtons = document.querySelectorAll('.trash');
 
 /* ==========NOTE ADDER========== */
@@ -32,7 +32,7 @@ export const readerBackButton = document.querySelector('.reader__button');
 
 
 
-export const notesController = {
+export const Notes_Controller = {
     
     add_note() {
         let newDate = new Date();
