@@ -17,8 +17,8 @@ const trashButtons = document.querySelectorAll('.trash');
 
 /* ==========NOTE ADDER========== */
 export const noteAdder = document.querySelector('#adder__noter');
-const adderTitle = document.querySelector('.title');
-const adderText = document.querySelector('.textarea');
+export const adderTitle = document.querySelector('.title');
+export const adderText = document.querySelector('.textarea');
 export const addButton = document.querySelector('.add__button');
 export const backButton = document.querySelector('.back__button');
 export const editButton = document.querySelector('.edit__button');
@@ -73,7 +73,7 @@ export const Notes_Controller = {
     },
 
     
-    read__note(_event) {
+    read_note(_event) {
         let note = _event.target.closest('.note');
         let tempObj = JSON.parse(localStorage.getItem('notes'));
          
@@ -94,7 +94,7 @@ export const Notes_Controller = {
     },
 
    
-    note__orderChange(_event) {
+    note_order_change(_event) {
         let note = _event.target.closest('.note');
         let tempObj = JSON.parse(localStorage.getItem('notes'));
  
@@ -126,7 +126,7 @@ export const Notes_Controller = {
         };
     },
 
-    edit__note(_event) {
+    edit_note(_event) {
         let note = _event.target.closest('.note');
         let tempObj = JSON.parse(localStorage.getItem('notes'));
  
@@ -166,7 +166,7 @@ export const Notes_Controller = {
         }
     },
 
-    delete__note(_event) {
+    delete_note(_event) {
         let approve = confirm('Are you sure?');
  
         if(approve) {

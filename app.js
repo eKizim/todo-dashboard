@@ -5,14 +5,14 @@ const app = express();
 
 let PORT = 3000;
 
-app.use(express.static('./public'));
+app.use(express.static('./static'));
 
 app.get('/', (req, res) => {
 	res.sendFile('index.html', {
-		root: './public/html',
+		root: './static/html',
 	})
 });
 
 app.listen(PORT)
 
-console.log(`Server is run on http://localhost:${PORT}`);
+console.log(`Server run on http://localhost:${PORT}`);
