@@ -77,9 +77,9 @@ export const Notes_Controller = {
         let note = _event.target.closest('.note');
         let tempObj = JSON.parse(localStorage.getItem('notes'));
          
-        for(let obj of tempObj) {
-            if(`index-${obj.id}` === note.id) {
- 
+        tempObj.find(item => {
+            if(item.id == note.id.slice(-1)) {
+
                 Object.values(ADDER.children).forEach(field => {
                     if(field.id != 'adder__reader') {
                         field.style.display = 'none';
@@ -87,10 +87,11 @@ export const Notes_Controller = {
                 });
  
                 noteReader.style.display = 'flex';
-                readerTitle.textContent = obj.title;
-                readerText.textContent = obj.text;
+                readerTitle.textContent = item.title;
+                readerText.textContent = item.text;
+
             };
-        };
+        }); 
     },
 
    
@@ -99,8 +100,8 @@ export const Notes_Controller = {
         let tempObj = JSON.parse(localStorage.getItem('notes'));
  
         if(_event.target.className === 'up') {
-            tempObj.forEach(obj => {
-                if(`index-${obj.id}` === note.id && obj.id !== 1) {
+            tempObj.find(obj => {
+                if(obj.id == note.id.slice(-1) && obj.id !== 1) {
                     tempObj[obj.id - 2].id = obj.id;
                     obj.id = obj.id - 1;
  
@@ -112,8 +113,8 @@ export const Notes_Controller = {
             });
  
         } else if(_event.target.className === 'down') {
-            tempObj.forEach(obj => {
-                if(`index-${obj.id}` === note.id && obj.id !== tempObj.length) {
+            tempObj.find(obj => {
+                if(obj.id == note.id.slice(-1) && obj.id !== tempObj.length) {
                     tempObj[obj.id].id = obj.id;
                     obj.id = obj.id + 1;
  
@@ -130,10 +131,10 @@ export const Notes_Controller = {
         let note = _event.target.closest('.note');
         let tempObj = JSON.parse(localStorage.getItem('notes'));
  
-        for(let obj of tempObj) {
-            if(`index-${obj.id}` === note.id) {
-                adderTitle.value = obj.title;
-                adderText.value = obj.text;
+        tempObj.find(item => {
+            if(item.id == note.id.slice(-1)) {
+                adderTitle.value = item.title;
+                adderText.value = item.text;
  
                 Object.values(ADDER.children).forEach(field => {
                     if(field.id != 'adder__noter') {
@@ -146,9 +147,9 @@ export const Notes_Controller = {
  
                 noteAdder.style.display = 'flex';
  
-                editButton.onclick =  function() {
-                     obj.title = adderTitle.value;
-                     obj.text = adderText.value;
+                editButton.onclick = () => {
+                     item.title = adderTitle.value;
+                     item.text = adderText.value;
  
                      adderTitle.value = '';
                      adderText.value = '';
@@ -162,8 +163,8 @@ export const Notes_Controller = {
                     localStorage.setItem('notes', JSON.stringify(tempObj));
                     localStorageUpdate.notesRefresh();
                 }
-            }
-        }
+            }    
+        });
     },
 
     delete_note(_event) {
@@ -173,10 +174,11 @@ export const Notes_Controller = {
             let note = _event.target.closest('.note');
             let tempObj = JSON.parse(localStorage.getItem('notes'));
  
-            tempObj.forEach(obj => {
-                if(`index-${obj.id}` === note.id) {
-                    tempObj.splice(obj.id - 1, 1);
- 
+            //FIX -- Empty error after deleting
+            tempObj.find(item => {
+                if(item.id == note.id.slice(-1)) {
+                    tempObj.splice(item.id - 1, 1);
+                
                     for(let i = 0; i <= tempObj.length; i++) {
                         if(!tempObj[i]) continue;
                         tempObj[i].id = i + 1;

@@ -31,55 +31,53 @@ export const Stickers_Controller = {
     add_sticker() {
         if(STICKERS.children.length == 13) return alert("Too much stickers :/");
 
-    let newDate = new Date();
-    let day = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
+        let newDate = new Date();
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
 
-    
+        if(day.toString().length != 2) {
+            day = `0${day}`;
+        };
 
-    if(day.toString().length != 2) {
-        day = `0${day}`;
-    };
+        if(month.toString().length != 2) {
+            month = `0${month}`;
+        };
 
-    if(month.toString().length != 2) {
-        month = `0${month}`;
-    }
+        let stickerDate = `${day}:${month}:${year}`;
 
-    let stickerDate = `${day}:${month}:${year}`;
+        if(stickerTitle.value && stickerList.children.length > 0) {
+            let tempObj = JSON.parse(localStorage.getItem('stickers'));
 
-    if(stickerTitle.value && stickerList.children.length > 0) {
-        let tempObj = JSON.parse(localStorage.getItem('stickers'));
-
-        let stickerObj = {
-            id: STICKERS.children.length + 1,
-            title: stickerTitle.value,
-            date: stickerDate,
-            tasks: [],
-        }
-
-        for(let task of stickerList.children) {
-            let tempObj = {
-                id: stickerObj.tasks.length + 1,
-                check: false,
-                text: task.textContent,
+            let stickerObj = {
+                id: STICKERS.children.length + 1,
+                title: stickerTitle.value,
+                date: stickerDate,
+                tasks: [],
             }
+
+            for(let task of stickerList.children) {
+                let tempObj = {
+                    id: stickerObj.tasks.length + 1,
+                    check: false,
+                    text: task.textContent,
+                }
             
-            stickerObj.tasks.push(tempObj); 
-        }
+                stickerObj.tasks.push(tempObj); 
+            }
 
-        tempObj.push(stickerObj);
+            tempObj.push(stickerObj);
 
-        localStorage.setItem('stickers', JSON.stringify(tempObj));
+            localStorage.setItem('stickers', JSON.stringify(tempObj));
 
-        localStorageUpdate.stickersRefresh();
+            localStorageUpdate.stickersRefresh();
 
-        stickerList.innerHTML = '';
-        stickerTitle.value = '';
-        stickerText.value = '';
+            stickerList.innerHTML = '';
+            stickerTitle.value = '';
+            stickerText.value = '';
 
-        stickerAdder.style.display = 'none';
-        defaultAdder.style.display = 'flex';
+            stickerAdder.style.display = 'none';
+            defaultAdder.style.display = 'flex';
         }
     },
 
@@ -105,11 +103,11 @@ export const Stickers_Controller = {
         
         stickerReader.style.display = 'flex';
     
-        for(let obj of tempObj) {
-            if(`index-${obj.id}` === sticker.id) {
-                stickerReaderTitle.textContent = `#${obj.title}`;
-                stickerReaderTitle.id = `#-${obj.id}`
-                obj.tasks.forEach(task => {
+        tempObj.find(item => {
+            if(item.id == sticker.id.slice(-1)) {
+                stickerReaderTitle.textContent = `#${item.title}`;
+                stickerReaderTitle.id = `#-${item.id}`
+                item.tasks.forEach(task => {
                     taskList.innerHTML += `<div class="task">
                                                 <li id="index-${task.id}" >${task.text}</li>
                                                 <button class="task__edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
@@ -125,40 +123,26 @@ export const Stickers_Controller = {
                     } 
                 }); 
             }
-        }
+        });
     },
 
     sticker_task_checker(_li) {
         let tempObj = JSON.parse(localStorage.getItem('stickers'));
 
-        if(!_li.classList.contains('checked')) {
-            _li.classList.add('checked');
+        _li.classList.toggle('checked');
 
-            for(let obj of tempObj) {
-                if(`#-${obj.id}` === stickerReaderTitle.id) {
-                    obj.tasks.forEach(item => {
-                        if(`index-${item.id}` === _li.id) {
-                            item.check = true;
+        tempObj.find(item => {
+                if(item.id == stickerReaderTitle.id.slice(2)) {
+                    item.tasks.find(task => {
+                        if(task.id == _li.id.slice(-1)) {
+                            _li.classList.contains('checked') ? 
+                            task.check = true : task.check = false;
                         }
-                    })   
-                }; 
-            };
-            localStorage.setItem('stickers', JSON.stringify(tempObj));
+                    });
+                }
+            });
 
-        } else {
-            _li.classList.remove('checked');
-
-            for(let obj of tempObj) {
-                if(`#-${obj.id}` === stickerReaderTitle.id) {
-                    obj.tasks.forEach(item => {
-                        if(`index-${item.id}` === _li.id) {
-                            item.check = false;
-                        }
-                    })   
-                }; 
-            };
-            localStorage.setItem('stickers', JSON.stringify(tempObj));
-        }
+        localStorage.setItem('stickers', JSON.stringify(tempObj));
     },
 
     edit_sticker_title(_event) {
@@ -212,24 +196,24 @@ export const Stickers_Controller = {
         let taskEditorButton = taskEditorArea.querySelector('.task-editor__button');
         let taskEditorField = taskEditorArea.querySelector('.task-editor__field');
         
+        //FIX -- Empty error while editing
         taskEditorButton.onclick = () => {
             if(taskEditorField.value) {
                 li.textContent = taskEditorField.value;
     
-                tempObj.forEach(item => {
-                    if(`#-${item.id}` === stickerReaderTitle.id) {
-                        for(let elem of item.tasks) {
-                            if(`index-${elem.id}` === li.id) {
-                                elem.text = li.textContent;
-                                if(elem.check) elem.check = false;
+                tempObj.find(item => {
+                    if(item.id == stickerReaderTitle.id.slice(2)) {
+                        item.tasks.find(item_task => {
+                            if(item_task.id == li.id.slice(-1)) {
+                                item_task.text = li.textContent;
+                                if(item_task.check) item_task.check = false;
                             }
-                        }
+                        });
                     }
                 });
     
-                if(li.classList.contains('checked')) {
-                    li.classList.remove('checked');
-                }
+
+                if(li.classList.contains('checked')) li.classList.remove('checked');
     
                 localStorage.setItem('stickers', JSON.stringify(tempObj));
                 taskEditorArea.replaceWith(task);
@@ -244,19 +228,19 @@ export const Stickers_Controller = {
     
         task.remove();
     
-        for(let obj of tempObj) {
-            if(`#-${obj.id}` === stickerReaderTitle.id) {
-                obj.tasks.forEach(item => {
-                    if(`index-${item.id}` === li.id) {
-                        obj.tasks.splice(item.id - 1, 1);
-                    }
+        tempObj.find(item => {
+            if(item.id == stickerReaderTitle.id.slice(2)) {
+                item.tasks.find(task => {
+                    if(task.id == li.id.slice(-1)) {
+                        item.tasks.splice(task.id - 1, 1);
+
+                        for(let i = 0; i < item.tasks.length; i++) {
+                            item.tasks[i].id = i + 1; 
+                        }   
+                    };
                 });
-                    
-                for(let i = 0; i < obj.tasks.length; i++) {
-                    obj.tasks[i].id = i + 1;
-                }
             }
-        }
+        });
     
         localStorage.setItem('stickers', JSON.stringify(tempObj));
     }, 
@@ -287,17 +271,17 @@ export const Stickers_Controller = {
                                           </svg></button>
                                         </div>`;
     
-                for(let obj of tempObj) {
-                    if(`#-${obj.id}` === stickerReaderTitle.id) {
+                tempObj.find(item => {
+                    if(item.id == stickerReaderTitle.id.slice(2)) {
                         let newTask = {
-                            id: obj.tasks.length + 1,
+                            id: item.tasks.length + 1,
                             check: false,
                             text: taskEditorField.value,
                         }
-    
-                        obj.tasks.push(newTask);
+
+                        item.tasks.push(newTask);
                     }
-                }
+                });
             }
     
             localStorage.setItem('stickers', JSON.stringify(tempObj));
@@ -312,9 +296,9 @@ export const Stickers_Controller = {
             let sticker = _event.target.closest('.sticker');
             let tempObj = JSON.parse(localStorage.getItem('stickers'));
     
-            tempObj.forEach(obj => {
-                if(`index-${obj.id}` === sticker.id) {
-                    tempObj.splice(obj.id - 1, 1);
+            tempObj.find(item => {
+                if(item.id == sticker.id.slice(-1)) {
+                    tempObj.splice(item.id - 1, 1);
     
                     for(let i = 0; i < tempObj.length; i++) {
                         if(!tempObj[i].id) continue;
@@ -329,7 +313,6 @@ export const Stickers_Controller = {
                     });
     
                     defaultAdder.style.display = 'flex';
-    
                     
                 }
             });
