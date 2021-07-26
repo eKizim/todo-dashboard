@@ -50,20 +50,20 @@ export const Stickers_Controller = {
             let tempObj = JSON.parse(localStorage.getItem('stickers'));
 
             let stickerObj = {
-                id: STICKERS.children.length + 1,
+                id: tempObj.length + 1,
                 title: stickerTitle.value,
                 date: stickerDate,
                 tasks: [],
             }
 
             for(let task of stickerList.children) {
-                let tempObj = {
+                let task_tempObj = {
                     id: stickerObj.tasks.length + 1,
                     check: false,
                     text: task.textContent,
                 }
             
-                stickerObj.tasks.push(tempObj); 
+                stickerObj.tasks.push(task_tempObj); 
             }
 
             tempObj.push(stickerObj);
@@ -231,12 +231,13 @@ export const Stickers_Controller = {
         tempObj.find(item => {
             if(item.id == stickerReaderTitle.id.slice(2)) {
                 item.tasks.find(task => {
+                    if(task == undefined) return null;
                     if(task.id == li.id.slice(-1)) {
                         item.tasks.splice(task.id - 1, 1);
 
                         for(let i = 0; i < item.tasks.length; i++) {
-                            item.tasks[i].id = i + 1; 
-                        }   
+                            item.tasks[i].id = i + 1;    
+                        };     
                     };
                 });
             }

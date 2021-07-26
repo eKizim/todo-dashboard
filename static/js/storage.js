@@ -37,7 +37,9 @@ export const localStorageUpdate = {
                                                  </div>
                                              </div>`; 
              } 
-         } 
+         } else {
+            notebookTable.innerHTML = `<h6 id="notebook__placeholder">This is place for notes<br>Now it's empty</h6>`;
+         }
          
          counter.textContent = notes.length;
      },
@@ -63,9 +65,11 @@ export const localStorageUpdate = {
                                          <h6 class="sticker__name">#${sticker.title}</h6>
                                      </div>`
              }
+         } else {
+            STICKERS.innerHTML = `<h6 id="stickers__placeholder">This is place for stickers<br>Now it's empty</h6>`;
          }
      },
- };
+};
 
 
  

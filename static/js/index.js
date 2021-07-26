@@ -192,7 +192,6 @@ addTask.addEventListener('click', Stickers_Controller.sticker_task_add);
 
 //######################################################################
 
-/* TODO -- Notes placeholder; */
 /* TODO -- Field cleaner on page load/reload */
 
 //######################################################################
