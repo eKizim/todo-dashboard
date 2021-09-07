@@ -6,8 +6,7 @@ import { ADDER, defaultAdder } from './index.js';
 //=============================================================
 
 // NOTEBOOK
-export const notebookTable = document.querySelector('#notebook__table');
-export const counter = document.querySelector('#counter');
+const notebookTable = document.querySelector('#notebook__table');
 
 /* ==========NOTE BUTTONS========== */
 const upButtons = document.querySelectorAll('.up');
@@ -16,18 +15,16 @@ const editNoteButtons = document.querySelectorAll('.edit');
 const trashButtons = document.querySelectorAll('.trash');
 
 /* ==========NOTE ADDER========== */
-export const noteAdder = document.querySelector('#adder__noter');
-export const adderTitle = document.querySelector('.title');
-export const adderText = document.querySelector('.textarea');
-export const addButton = document.querySelector('.add__button');
-export const backButton = document.querySelector('.back__button');
-export const editButton = document.querySelector('.edit__button');
+const noteAdder = document.querySelector('#adder__noter');
+const adderTitle = document.querySelector('.title');
+const adderText = document.querySelector('.textarea');
+const addButton = document.querySelector('.add__button');
+const editButton = document.querySelector('.edit__button');
 
 /* ==========NOTE READER========== */ 
-export const noteReader = document.querySelector('#adder__reader');
+const noteReader = document.querySelector('#adder__reader');
 const readerTitle = document.querySelector('#reader__title');
 const readerText = document.querySelector('#reader__text');
-export const readerBackButton = document.querySelector('.reader__button');
 //=============================================================
 
 
@@ -101,6 +98,8 @@ export const Notes_Controller = {
  
         if(_event.target.className === 'up') {
             tempObj.find(obj => {
+
+                /* Destructurization? */
                 if(obj.id == note.id.slice(-1) && obj.id !== 1) {
                     tempObj[obj.id - 2].id = obj.id;
                     obj.id = obj.id - 1;
@@ -114,6 +113,8 @@ export const Notes_Controller = {
  
         } else if(_event.target.className === 'down') {
             tempObj.find(obj => {
+
+                /* Destructurization? */
                 if(obj.id == note.id.slice(-1) && obj.id !== tempObj.length) {
                     tempObj[obj.id].id = obj.id;
                     obj.id = obj.id + 1;
@@ -175,6 +176,7 @@ export const Notes_Controller = {
             let tempObj = JSON.parse(localStorage.getItem('notes'));
  
             //FIX -- Empty error after deleting
+            /* Find better way to deleting */
             tempObj.find(item => {
                 if(item.id == note.id.slice(-1)) {
                     tempObj.splice(item.id - 1, 1);
@@ -197,3 +199,9 @@ export const Notes_Controller = {
     },
 };
 
+/**
+ * Rebuild with React(?)
+ * Create class insted of function
+ * Clean up imports
+ * Split code
+ * */

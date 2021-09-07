@@ -5,24 +5,19 @@ import { localStorageUpdate } from './storage.js';
 import { ADDER, defaultAdder } from './index.js';
 
 // STICKER FIELD
-export const STICKERS = document.querySelector('#stickers');
+const STICKERS = document.querySelector('#stickers');
 
 /* ==========STICKER ADDER========== */
-export const stickerAdder = document.querySelector('#adder__sticker');
-export const stickerTitle = document.querySelector('.sticker__title');
-export const stickerList = document.querySelector('.sticker__list');
-export const stickerText = document.querySelector('.sticker__text');
-export const createTaskButton = document.querySelector('.create__task');
-export const addStickerButton = document.querySelector('.add-sticker__button');
-export const stickerBackButton = document.querySelector('.sticker-back__button');
+const stickerAdder = document.querySelector('#adder__sticker');
+const stickerTitle = document.querySelector('.sticker__title');
+const stickerList = document.querySelector('.sticker__list');
+const stickerText = document.querySelector('.sticker__text');
 
 /* STICKER READER */
-export const stickerReader = document.querySelector('#sticker__reader');
+const stickerReader = document.querySelector('#sticker__reader');
 const stickerReaderHeader = document.querySelector('.sticker-reader__header')
-export const stickerReaderTitle = document.querySelector('.sticker-reader__title');
-export const editStickerReaderTitle = document.querySelector('.edit__sticker-reader__title');
-export const taskList = document.querySelector('.task__list');
-export const stickerReaderButton = document.querySelector('.sticker-reader-back__button');
+const stickerReaderTitle = document.querySelector('.sticker-reader__title');
+const taskList = document.querySelector('.task__list');
 
 
 
@@ -323,3 +318,12 @@ export const Stickers_Controller = {
         }
     },
 }
+
+
+/**
+ * Class insted of func
+ * Make stickers count 50+
+ * Make sticker editing menu clearly
+ * Make stickers swipe
+ * Split code
+ * */

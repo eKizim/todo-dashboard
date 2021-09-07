@@ -3,16 +3,20 @@
 //================================
 const ADDER = document.querySelector('#adder');
 const defaultAdder = document.querySelector('#adder__default');
-const newNoteButton = document.querySelector('#button__note');
-const newStickerButton = document.querySelector('#button__sticker');
 
 export {ADDER, defaultAdder}
 
 //================================
-//   LOCAL STORAGE REFRESH
+//          IMPORTS
 //================================
 import { localStorageUpdate } from './storage.js';
+import { Notes_Controller } from './notes.js';
+import { Stickers_Controller } from './stickers.js';
 
+
+//================================
+//   LOCAL STORAGE REFRESH
+//================================
 localStorageUpdate.notesRefresh();
 localStorageUpdate.stickersRefresh();
 
@@ -20,31 +24,31 @@ localStorageUpdate.stickersRefresh();
 //================================
 //  OPEN STICKER OR NOTE CREATOR
 //================================
-import { noteAdder } from './notes.js';
-import { stickerAdder } from './stickers.js';
-
+const newNoteButton = document.querySelector('#button__note');
+const noteAdder = document.querySelector('#adder__noter');
 newNoteButton.addEventListener('click', () => {
      defaultAdder.style.display = 'none';
      noteAdder.style.display = 'flex';
  });
  
- newStickerButton.addEventListener('click', () => {
-     defaultAdder.style.display = 'none';
-     stickerAdder.style.display = 'flex';
+const newStickerButton = document.querySelector('#button__sticker');
+const stickerAdder = document.querySelector('#adder__sticker');
+newStickerButton.addEventListener('click', () => {
+    defaultAdder.style.display = 'none';
+    stickerAdder.style.display = 'flex';
  });
 
 
 //================================
 //        NOTEBOOK
 //================================
-import { notebookTable, Notes_Controller } from './notes.js';
 
 /*==============  CREATE A NEW NOTE ================ */
-import { addButton } from './notes.js';
-
+const addButton = document.querySelector('.add__button');
 addButton.addEventListener('click', Notes_Controller.add_note);
 
 /* ================ NOTE EVENTS =============== */
+const notebookTable = document.querySelector('#notebook__table');
 notebookTable.addEventListener('click', (event) => {
     let note = event.target.closest('.note');
 
@@ -70,24 +74,27 @@ notebookTable.addEventListener('click', (event) => {
 
 
 /* ================ NOTE EVENTS =============== */
-import { readerBackButton, backButton, noteReader, editButton, adderTitle, adderText } from './notes.js';
-
 /* FIX -- Make general button or button creator */
-
+const readerBackButton = document.querySelector('.reader__button');
+const noteReader = document.querySelector('#adder__reader');
 readerBackButton.addEventListener('click', () => {
     noteReader.style.display = 'none';
     defaultAdder.style.display = 'flex';
 });
 
+const backButton = document.querySelector('.back__button');
 backButton.addEventListener('click', () => {
     if(noteAdder.style.display == 'flex') {
         noteAdder.style.display = 'none';
         defaultAdder.style.display = 'flex';
 
+        const adderTitle = document.querySelector('.title');
+        const adderText = document.querySelector('.textarea');
         adderTitle.value = '';
         adderText.value = '';
     }
 
+    const editButton = document.querySelector('.edit__button');
     if(editButton.style.display == 'flex') {
         editButton.style.display = 'none';
         addButton.style.display = 'flex';
@@ -100,34 +107,34 @@ backButton.addEventListener('click', () => {
 //        STICKERS
 //================================
 
-import { Stickers_Controller } from './stickers.js'
 /* ================ CREATE A NEW STICKER =============== */
-import { addStickerButton } from './stickers.js';
-
+const addStickerButton = document.querySelector('.add-sticker__button');
 addStickerButton.addEventListener('click', Stickers_Controller.add_sticker);
 
-
 /* ================ CREATE STICKER TASK =============== */
-import { createTaskButton } from './stickers.js';
-
+const createTaskButton = document.querySelector('.create__task');
 createTaskButton.addEventListener('click', Stickers_Controller.create_sticker_task);
 
 
 /* ============= STICKER BACK BUTTON AND CLEANING ===================*/ 
-import { stickerReader, stickerTitle, stickerList, stickerText, stickerBackButton, stickerReaderButton } from './stickers.js';
-
 /* FIXME -- Make general button or button creator */
+const stickerBackButton = document.querySelector('.sticker-back__button');
 stickerBackButton.addEventListener('click', () => {
     if(stickerAdder.style.display == 'flex') {
         stickerAdder.style.display = 'none';
         defaultAdder.style.display = 'flex';
 
+        const stickerTitle = document.querySelector('.sticker__title');
+        const stickerList = document.querySelector('.sticker__list');
+        const stickerText = document.querySelector('.sticker__text');
         stickerTitle.value = '';
         stickerList.innerHTML = '';
         stickerText.value = '';
     }
 }); 
 
+const stickerReaderButton = document.querySelector('.sticker-reader-back__button');
+const stickerReader = document.querySelector('#sticker__reader');
 stickerReaderButton.addEventListener('click', () => {
     if(stickerReader.style.display == 'flex') {
         stickerReader.style.display = 'none';
@@ -136,8 +143,7 @@ stickerReaderButton.addEventListener('click', () => {
 });
 
 /* ============== STICKER EVENTS ================ */
-import { STICKERS } from './stickers.js';
-
+const STICKERS = document.querySelector('#stickers');
 STICKERS.addEventListener('click', (event) => {
     let sticker = event.target.closest('.sticker');
 
@@ -151,16 +157,14 @@ STICKERS.addEventListener('click', (event) => {
 
 
 /* ============EDIT STICKER TITLE ============== */
-import { editStickerReaderTitle } from './stickers.js';
-
+const editStickerReaderTitle = document.querySelector('.edit__sticker-reader__title');
 editStickerReaderTitle.addEventListener('click', (event) => {
     return Stickers_Controller.edit_sticker_title(event);
 });
 
 
 /* ============= STICKER TASK EVENTS =============== */
-import { taskList } from './stickers.js';
-
+const taskList = document.querySelector('.task__list');
 taskList.addEventListener('click', (event) => {
     let task = event.target.closest('.task');
     let li = task.querySelector('li');
@@ -193,6 +197,7 @@ addTask.addEventListener('click', Stickers_Controller.sticker_task_add);
 //######################################################################
 
 /* TODO -- Field cleaner on page load/reload */
+/* TODO -- Rebuild all on React & Electron */
 
 //######################################################################
 

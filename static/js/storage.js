@@ -1,6 +1,3 @@
-import { notebookTable, counter } from "./notes.js";
-import { STICKERS } from "./stickers.js";
-
 export const localStorageUpdate = {
     
      notesRefresh() {
@@ -8,9 +5,10 @@ export const localStorageUpdate = {
              return localStorage.setItem('notes', JSON.stringify([]));
          }
          
-         let notes = JSON.parse(localStorage.getItem('notes'));
- 
+         const notebookTable = document.querySelector('#notebook__table');    
          notebookTable.innerHTML = '';
+     
+         let notes = JSON.parse(localStorage.getItem('notes'));
 
          if(notes.length !== 0){
              for(let note of notes) {
@@ -41,7 +39,8 @@ export const localStorageUpdate = {
             notebookTable.innerHTML = `<h6 id="notebook__placeholder">This is place for notes<br>Now it's empty</h6>`;
          }
          
-         counter.textContent = notes.length;
+        const counter = document.querySelector('#counter'); 
+        counter.textContent = notes.length;
      },
  
      stickersRefresh() {
@@ -49,9 +48,10 @@ export const localStorageUpdate = {
              return localStorage.setItem('stickers', JSON.stringify([]));
          }
  
-         let stickers = JSON.parse(localStorage.getItem('stickers'));
- 
+         const STICKERS = document.querySelector('#stickers');
          STICKERS.innerHTML = '';
+
+         let stickers = JSON.parse(localStorage.getItem('stickers'));
  
          if(stickers.length !== 0) {
          for(let sticker of stickers){
@@ -62,7 +62,7 @@ export const localStorageUpdate = {
                                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                            </svg></button>
                                          </div>
-                                         <h6 class="sticker__name">#${sticker.title}</h6>
+                                         <h6 class="sticker__name">${sticker.title}</h6>
                                      </div>`
              }
          } else {
@@ -71,6 +71,4 @@ export const localStorageUpdate = {
      },
 };
 
-
- 
 
