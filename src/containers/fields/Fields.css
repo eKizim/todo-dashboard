@@ -1,0 +1,9 @@
+#fields {
+	width: 810px;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	background-color: blue;
+}
