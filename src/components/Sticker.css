@@ -1,0 +1,8 @@
+.sticker {
+	width: 160px;
+	height: 160px;
+	padding: 10px;
+
+	background-color: darkgrey;
+	border-radius: 15px;
+}
