@@ -1,6 +1,6 @@
 import React from 'react';
-import Notes from './notes/Notes.js';
-import Stickers from './stickers/Stickers.js';
+import Notes from './notes/Notes.jsx';
+import Stickers from './stickers/Stickers.jsx';
 import './Fields.css';
 
 export default class Fields extends React.Component {
@@ -8,7 +8,7 @@ export default class Fields extends React.Component {
     return (
       <div id="fields">
         <Stickers/>
-        <Notes/>
+        <Notes notes={this.props.notes}/>
       </div>
     )
   }

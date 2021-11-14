@@ -1,5 +1,5 @@
 import React from 'react';
-import './Note.css';
+import './NoteUnit.css';
 
 export default class Note extends React.Component {
 	constructor(props) {

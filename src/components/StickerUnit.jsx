@@ -1,5 +1,5 @@
 import React from 'react';
-import './Sticker.css';
+import './StickerUnit.css';
 
 export default class Sticker extends React.Component {
 	constructor(props) {
@@ -10,7 +10,7 @@ export default class Sticker extends React.Component {
 
 	render() {
 		return (
-			<div className="sticker">
+			<div className="sticker_unit">
 				<p>{this.stickerDate}</p>
 				<p>{this.stickerTitle}</p>
 			</div>
