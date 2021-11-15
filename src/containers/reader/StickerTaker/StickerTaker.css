@@ -1,0 +1,36 @@
+#sticker_taker {
+	width: 465px;
+	height: 590px;
+	padding: 15px;
+
+	display: flex;
+	flex-direction: column; 
+	align-content: center;
+	justify-content: start;
+
+	background-color: darkgrey;
+}
+
+#sticker_taker__title {
+	height: 40px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+#sticker_taker__points-field {
+	height: 40px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+#sticker_taker__buttons {
+	display: flex;
+	justify-content: space-between;
+
+}
+
+#sticker_taker__buttons button {
+	width: 150px;
+	height: 40px;
+	font-size: 18px;
+}

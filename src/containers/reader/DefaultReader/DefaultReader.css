@@ -1,0 +1,30 @@
+#default_reader {
+	width: 465px;
+	height: 420px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+
+	background-color: darkgrey;
+}
+
+#default_reader__title h3,  #default_reader__title p {
+	font-size: 40px;
+	text-align: center;
+}
+
+#default_reader__buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+#default_reader__buttons button {
+	width: 170px;
+	height: 130px;
+
+	font-size: 20px;
+	border: none;
+	border-radius: 10px;
+}

@@ -12,7 +12,10 @@ export default class Notes extends React.Component {
 			<div id="notes">
 				<NotesHeader/>
 				<div id="notes_dashboard">
-					{this.props.notes}
+					{this.props.notes.map(note => (
+        		<NoteUnit key={note.unitId} unitId={note.unitId} unitTitle={note.unitTitle} unitDate={note.unitDate}/>
+      			))
+					}
 				</div>
 			</div>
 		)
