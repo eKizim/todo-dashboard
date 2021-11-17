@@ -2,7 +2,10 @@
 //         IMPORTS
 //================================
 import { localStorageUpdate } from './storage.js';
-import { ADDER, defaultAdder } from './index.js';
+//===================================================
+
+const ADDER = document.querySelector('#adder');
+const defaultAdder = document.querySelector('#adder__default');
 
 // STICKER FIELD
 const STICKERS = document.querySelector('#stickers');
@@ -318,12 +321,3 @@ export const Stickers_Controller = {
         }
     },
 }
-
-
-/**
- * Class insted of func
- * Make stickers count 50+
- * Make sticker editing menu clearly
- * Make stickers swipe
- * Split code
- * */

@@ -2,17 +2,13 @@
 //         IMPORTS
 //================================
 import { localStorageUpdate } from './storage.js';
-import { ADDER, defaultAdder } from './index.js';
 //=============================================================
+
+const ADDER = document.querySelector('#adder');
+const defaultAdder = document.querySelector('#adder__default');
 
 // NOTEBOOK
 const notebookTable = document.querySelector('#notebook__table');
-
-/* ==========NOTE BUTTONS========== */
-const upButtons = document.querySelectorAll('.up');
-const downButtons = document.querySelectorAll('.down');
-const editNoteButtons = document.querySelectorAll('.edit');
-const trashButtons = document.querySelectorAll('.trash');
 
 /* ==========NOTE ADDER========== */
 const noteAdder = document.querySelector('#adder__noter');
@@ -175,8 +171,6 @@ export const Notes_Controller = {
             let note = _event.target.closest('.note');
             let tempObj = JSON.parse(localStorage.getItem('notes'));
  
-            //FIX -- Empty error after deleting
-            /* Find better way to deleting */
             tempObj.find(item => {
                 if(item.id == note.id.slice(-1)) {
                     tempObj.splice(item.id - 1, 1);
@@ -198,10 +192,3 @@ export const Notes_Controller = {
         }
     },
 };
-
-/**
- * Rebuild with React(?)
- * Create class insted of function
- * Clean up imports
- * Split code
- * */

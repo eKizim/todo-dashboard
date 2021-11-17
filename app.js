@@ -9,7 +9,7 @@ app.use(express.static('./static'));
 
 app.get('/', (req, res) => {
 	res.sendFile('index.html', {
-		root: './static/html',
+		root: './static',
 	})
 });
 

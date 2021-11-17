@@ -1,10 +1,7 @@
 //================================
 //       TITLE VARIABLES
 //================================
-const ADDER = document.querySelector('#adder');
 const defaultAdder = document.querySelector('#adder__default');
-
-export {ADDER, defaultAdder}
 
 //================================
 //          IMPORTS
@@ -60,7 +57,6 @@ notebookTable.addEventListener('click', (event) => {
     };
 
     if(event.target.className === 'edit') {
-        // FIX -- Clear fields after window change
         return Notes_Controller.edit_note(event);
     };
 
@@ -74,7 +70,7 @@ notebookTable.addEventListener('click', (event) => {
 
 
 /* ================ NOTE EVENTS =============== */
-/* FIX -- Make general button or button creator */
+/* FIX -- Create button component */
 const readerBackButton = document.querySelector('.reader__button');
 const noteReader = document.querySelector('#adder__reader');
 readerBackButton.addEventListener('click', () => {
@@ -185,19 +181,3 @@ taskList.addEventListener('click', (event) => {
 const addTask = document.querySelector('.add__task');
 
 addTask.addEventListener('click', Stickers_Controller.sticker_task_add);
-
-
-
-
-
-
-
-
-
-//######################################################################
-
-/* TODO -- Field cleaner on page load/reload */
-/* TODO -- Rebuild all on React & Electron */
-
-//######################################################################
-
