@@ -1,19 +1,14 @@
 import React from 'react';
 import './StickerUnit.css';
 
-export default class Sticker extends React.Component {
-	constructor(props) {
-		super(props);
-		this.stickerDate = this.props.stickerDate;
-		this.stickerTitle = this.props.stickerTitle;
-	}
+export default function Sticker({unitId, unitTitle, unitDate}) {
+	return (
+		<div className="sticker_unit">
+			<p className="sticker_unit__date">{unitDate}</p>
+			<p className="sticker_unit__title">{unitTitle}</p>
+			<button className="sticker_unit__delete-button">D</button>
+			<p className="sticker_unit__id">{unitId}</p>
+		</div>
+	)
+}	
 
-	render() {
-		return (
-			<div className="sticker_unit">
-				<p>{this.stickerDate}</p>
-				<p>{this.stickerTitle}</p>
-			</div>
-		)
-	}	
-}

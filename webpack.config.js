@@ -21,6 +21,10 @@ module.exports = {
         test: /\.(js|jsx)/,
         use: 'babel-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       }
     ]
   },
@@ -36,7 +40,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      inject: 'body',
+      favicon: './public/favicon.ico',
+      inject: 'body'
     })
   ]
 }

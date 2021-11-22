@@ -7,7 +7,7 @@ export default class Fields extends React.Component {
   render() {
     return (
       <div id="fields">
-        <Stickers/>
+        <Stickers stickers={this.props.stickers}/>
         <Notes notes={this.props.notes}/>
       </div>
     )

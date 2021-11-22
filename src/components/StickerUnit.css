@@ -2,7 +2,30 @@
 	width: 160px;
 	height: 160px;
 	padding: 10px;
+	position: relative;
 
 	background-color: darkgrey;
 	border-radius: 15px;
+}
+
+.sticker_unit__title {
+	display: inline;
+	font-size: 16px;
+	pointer-events: none;
+}
+
+.sticker_unit__date {
+	margin-bottom: 10px;
+	pointer-events: none;
+}
+
+.sticker_unit__delete-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.sticker_unit__id {
+	position: absolute;
+	bottom: 10px;
 }

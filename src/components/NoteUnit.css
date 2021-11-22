@@ -16,8 +16,8 @@
 	background-color: #683890;
 }
 
-.note_unit__buttons button {
-	margin: 0 5px;
+.note_unit__id, .note_unit__title, .note_unit__date {
+	pointer-events: none;
 }
 
 
