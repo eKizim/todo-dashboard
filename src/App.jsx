@@ -16,62 +16,44 @@ export default class App extends React.Component {
         mode: 'input',
         id: '',
         title: '',
-        tasks: ''
+        fill: ''
       },
 
       noterState: {
         mode: 'input',
         id: '',
         title: '',
-        text: ''
+        fill: ''
       }
     };
 
-    this.notesUpdate = this.notesUpdate.bind(this);
-    this.stickersUpdate = this.stickersUpdate.bind(this);
+    this.dataUpdater = this.dataUpdater.bind(this);
     this.fullCleanUp = this.fullCleanUp.bind(this);
   }
 
-  notesUpdate(title, text) {
-    let storage = this.state.notesData;
-
-    let date = new Date();
-    date = `${date.getDate()}-${date.getMonth()}-${date.getFullYear().toString().slice(2)}`
-
-    storage.push({
-      unitId: storage.length + 1, 
-      unitTitle: title, 
-      unitText: text,
-      unitDate: date
-    })
-
-    this.setState({
-      notesData: storage
-    });
-
-    window.localStorage.notes = JSON.stringify(storage);
-    console.log(`#--NOTES HAS BEEN UPDATED--#`)
-  };
-
-  stickersUpdate(title, tasks) {
-    let storage = this.state.stickersData;
-
+  dataUpdater = (_title, _fill, _type) => {
+    let storage = _type === 'notes' ? this.state.notesData : this.state.stickersData;
     let date = new Date();
     date = `${date.getDate()}-${date.getMonth()}-${date.getFullYear().toString().slice(2)}`;
 
     storage.push({
       unitId: storage.length + 1,
-      unitTitle: title,
-      unitTasks: tasks,
+      unitTitle: _title,
+      unitFill: _fill,
       unitDate: date
-    })
+    });
 
-    this.setState({
-      stickersData: storage
-    })
-
-    window.localStorage.stickers = JSON.stringify(storage);
-    console.log(`#--STICKERS HAS BEEN UPDATED--#`); 
+    switch(_type) {
+      case "notes":
+        this.setState({notesData: storage});
+        console.log(`#--NOTES HAS BEEN UPDATED--#`);
+        break;
+      case "stickers":
+        this.setState({stickersData: storage});
+        console.log(`#--STICKERS HAS BEEN UPDATED--#`);
+        break;
+    }
+    window.localStorage.setItem(_type, JSON.stringify(storage));
   }
 
   fullCleanUp() {
@@ -84,73 +66,49 @@ export default class App extends React.Component {
     }
   }
 
-  noterWriterMode = () => {
-    this.setState({
-      noterState: {
-        mode: 'input',
-        id: '',
-        title: '',
-        text: ''
-      }
-    })
+  writerModeOn = (_modal) => {
+    switch(_modal) {
+      case 'noter':
+        this.setState({noterState: {mode: 'input', id: '', title: '', fill: ''}});
+        break;
+      case 'sticker':
+        this.setState({stickerState: {mode: 'input', id: '', title: '', fill: ''}});
+        break;
+    }
   }
 
-  stickerWriterMode = () => {
-    this.setState({
-      stickerState: {
-        mode: 'input',
-        id: '',
-        title: '',
-        tasks: ''
-      }
-    })
-  }
+  readerModeOn = (_e, _target) => {
+    const storage = JSON.parse(window.localStorage.getItem(_target));
+    const filter = storage.find(item => item.unitId === Number(_e.target.firstChild.innerText));
 
-  noterReaderMode = (e) => {
-      let storage = JSON.parse(window.localStorage.notes);
-
-      storage.forEach(note => {
-        if(note.unitId === Number(e.target.firstChild.innerText)) {
+    switch(_target) {
+      case "notes":
           this.setState({
-            noterState: {
-              mode: 'read',
-              id: note.unitId,
-              title: note.unitTitle,
-              text: note.unitText
-            }
-          })
-        }
-      });
-    document.getElementById('screen_blocker').classList.add('active');
-    document.getElementById('noter').classList.add('show');
-  }
+            noterState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
+          });
+        
+        document.getElementById('screen_blocker').classList.add('active');
+        document.getElementById('noter').classList.add('show');
+        break;
 
-  stickerReaderMode = (e) => {
-    let storage = JSON.parse(window.localStorage.stickers);
-
-    storage.forEach(sticker => {
-      if(sticker.unitId === Number(e.target.lastChild.innerText)) {
+      case "stickers":
         this.setState({
-          stickerState: {
-            mode: 'read',
-            id: sticker.unitId,
-            title: sticker.unitTitle,
-            tasks: sticker.unitTasks
-          }
-        })
-      }
-    });
-    document.getElementById('screen_blocker').classList.add('active');
-    document.getElementById('master_sticker').classList.add('show');
+          stickerState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
+        });
+        
+        document.getElementById('screen_blocker').classList.add('active');
+        document.getElementById('master_sticker').classList.add('show');
+        break;
+    }
   }
 
-    // FIND BETTER SOLUTION
+  //### FIND BETTER SOLUTION
   stickerTaskCheck = (e) => {
     let storage = JSON.parse(window.localStorage.stickers);
     
     storage.forEach(sticker => {
       if(sticker.unitId === Number(document.getElementById('sticker_reader').dataset.stickerId)) {
-        sticker.unitTasks.forEach(task => {
+        sticker.unitFill.forEach(task => {
           if(task.taskId === e.target.dataset.key) {
             task.done = !task.done;
           }
@@ -160,7 +118,7 @@ export default class App extends React.Component {
               mode: 'read',
               id: sticker.unitId,
               title: sticker.unitTitle,
-              tasks: sticker.unitTasks
+              fill: sticker.unitFill
             }
           })
         })
@@ -173,65 +131,43 @@ export default class App extends React.Component {
     window.localStorage.stickers = JSON.stringify(storage);
   }
 
-  deleteNote = (e) => {
-      let storage = JSON.parse(window.localStorage.notes);
-      let removableUnit = e.target.closest('.note_unit');
-      let filteredStorage = storage.filter(note => note.unitId !== Number(removableUnit.firstChild.textContent));
-      filteredStorage.forEach(note => note.unitId = filteredStorage.indexOf(note) + 1)
-      
-      this.setState({
-        notesData: filteredStorage
-      });
-
-      window.localStorage.notes = JSON.stringify(filteredStorage);
-  }
-
-  deleteSticker = (e) => {
-    let storage =  JSON.parse(window.localStorage.stickers);
-    let removableUnit = e.target.closest('.sticker_unit');
-
-    let filteredStorage = storage.filter(sticker => sticker.unitId !== Number(removableUnit.lastChild.textContent))
-    filteredStorage.forEach(sticker => sticker.unitId = filteredStorage.indexOf(sticker) + 1);
+  deleteItem = (_e, _target) => {
+    const storage = JSON.parse(window.localStorage.getItem(`${_target}s`));
+    const rUnit = _e.target.closest(`.${_target}_unit`);
     
-    this.setState({
-      stickersData: filteredStorage
-    });
+    const filteredStorage = storage.filter(item => item.unitId !==Number(rUnit.firstChild.textContent));
+    filteredStorage.forEach(item => item.unitId = filteredStorage.indexOf(item) + 1);
 
-    window.localStorage.stickers = JSON.stringify(filteredStorage);
+      switch(_target) {
+        case "note":
+          this.setState({notesData: filteredStorage});
+          break;
+        case "sticker":
+          this.setState({stickersData: filteredStorage});
+          break;
+    }
+
+    window.localStorage.setItem(`${_target}s`, JSON.stringify(filteredStorage));
   }
 
   render() {
     return (
       <React.Fragment>
         <Controller 
-          noterWriterMode={this.noterWriterMode} 
-          stickerWriterMode={this.stickerWriterMode} 
+          writerModeOn={this.writerModeOn} 
           fullCleanUp={this.fullCleanUp}/>
         
         <ModalFields
-          notes={{
-            noterState: this.state.noterState, 
-            notesUpdate: this.notesUpdate
-          }} 
-          stickers={{
-            stickerState: this.state.stickerState, 
-            stickersUpdate: this.stickersUpdate, 
-            stickerTaskCheck: this.stickerTaskCheck
-          }}/>
+          noterState={this.state.noterState}
+          stickerState={this.state.stickerState}
+          stickerTaskCheck={this.stickerTaskCheck}
+          dataUpdater={this.dataUpdater}/>
         
         <Fields 
-          notes={{
-            notesData: this.state.notesData, 
-            noterReaderMode: this.noterReaderMode, 
-            deleteNote: this.deleteNote
-          }} 
-          stickers={{
-            stickersData: this.state.stickersData, 
-            stickerReaderMode: this.stickerReaderMode, 
-            deleteSticker: this.deleteSticker
-          }}/>
-
-          <div id="screen_blocker"></div>
+          notesData={this.state.notesData}
+          stickersData={this.state.stickersData}
+          readerModeOn={this.readerModeOn}
+          deleteItem={this.deleteItem}/>
       </React.Fragment>
     )
   }

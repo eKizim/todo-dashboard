@@ -10,15 +10,18 @@ export default class ModalFields extends React.Component {
 
     render() {
         return(
-            <div id="modal_fields">
-                <MasterSticker 
-                    stickersUpdate={this.props.stickers.stickersUpdate} 
-                    stickerState={this.props.stickers.stickerState} 
-                    stickerTaskCheck={this.props.stickers.stickerTaskCheck}/>
-                <Noter 
-                    notesUpdate={this.props.notes.notesUpdate} 
-                    noterState={this.props.notes.noterState}/>
-            </div>
+            <React.Fragment>
+                <div id="modal_fields">
+                    <MasterSticker 
+                        dataUpdater={this.props.dataUpdater} 
+                        stickerState={this.props.stickerState} 
+                        stickerTaskCheck={this.props.stickerTaskCheck}/>
+                    <Noter 
+                        dataUpdater={this.props.dataUpdater} 
+                        noterState={this.props.noterState}/>
+                </div>
+                <div id="screen_blocker"></div>
+          </React.Fragment>
         )
     }
 }

@@ -16,7 +16,7 @@ export default class Noter extends React.Component {
             <div id="noter">
               {this.props.noterState.mode === 'input' ? 
               <Writer 
-                notesUpdate={this.props.notesUpdate} 
+                dataUpdater={this.props.dataUpdater} 
                 closeNoter={this.closeNoter}/> 
               : 
               <Reader 
@@ -38,7 +38,7 @@ class Writer extends React.Component {
     const text = document.getElementById('writer_textarea');
     
     if(title.value && text.value) {
-      this.props.notesUpdate(title.value, text.value)
+      this.props.dataUpdater(title.value, text.value, 'notes');
       title.value = '';
       text.value = '';
 
@@ -77,7 +77,7 @@ class Reader extends React.Component {
             <button id="noter_buttons__cancel" onClick={this.props.closeNoter}>C</button>
         </div>
         <p id="reader_title">{this.props.noterState.title}</p>
-        <p id="reader_text">{this.props.noterState.text}</p>
+        <p id="reader_text">{this.props.noterState.fill}</p>
       </div>
     )
   }

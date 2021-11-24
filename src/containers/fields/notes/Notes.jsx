@@ -9,18 +9,19 @@ export default class Notes extends React.Component {
 
 	eventHandler = (e) => {
 		switch(e.target.className) {
-			case "note_trash__button":
-				this.props.notes.deleteNote(e);
-				break;
 			case "note_unit":
-				this.props.notes.noterReaderMode(e);
+				this.props.readerModeOn(e, 'notes');
+				break;
+			case "note_trash__button":
+				this.props.deleteItem(e, 'note');
+				break;
 		}
 	}
 
 	render() {
 		return(
 			<div id="notes" onClick={this.eventHandler}>
-				{this.props.notes.notesData.map(note => <NoteUnit key={note.unitId} unitId={note.unitId} unitTitle={note.unitTitle} unitDate={note.unitDate}/>)}
+				{this.props.notesData.map(note => <NoteUnit key={note.unitId} unitId={note.unitId} unitTitle={note.unitTitle} unitDate={note.unitDate}/>)}
 			</div>
 		)
 	}

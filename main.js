@@ -11,7 +11,7 @@ function createWindow () {
     }
   })
 
-  win.loadFile('./dist/index.html')
+  win.loadURL('localhost:3000')
 }
 
 app.whenReady().then(() => {

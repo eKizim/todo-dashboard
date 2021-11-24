@@ -10,10 +10,10 @@ export default class Stickers extends React.Component {
 	eventHandler = (e) => {
 		switch(e.target.className) {
 			case "sticker_unit":
-				this.props.stickers.stickerReaderMode(e);
+				this.props.readerModeOn(e, 'stickers');
 				break;
 			case "sticker_unit__delete-button":
-				this.props.stickers.deleteSticker(e);
+				this.props.deleteItem(e, 'sticker');
 				break;
 		}
 	}
@@ -21,7 +21,7 @@ export default class Stickers extends React.Component {
 	render() {
 		return(
 			<div id="stickers" onClick={this.eventHandler}>
-				{this.props.stickers.stickersData.map(sticker => <StickerUnit key={sticker.unitId} unitId={sticker.unitId} unitTitle={sticker.unitTitle} unitDate={sticker.unitDate}/>)}
+				{this.props.stickersData.map(sticker => <StickerUnit key={sticker.unitId} unitId={sticker.unitId} unitTitle={sticker.unitTitle} unitDate={sticker.unitDate}/>)}
 			</div>
 		)
 	}

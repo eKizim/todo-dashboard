@@ -16,13 +16,13 @@ export default class MasterSticker extends React.Component {
             <div id="master_sticker">
                 {this.props.stickerState.mode === 'input' ? 
                 <StickerWriter 
-                    stickersUpdate={this.props.stickersUpdate} 
+                    dataUpdater={this.props.dataUpdater} 
                     closeSticker={this.closeSticker}/> 
                 : 
                 <StickerReader 
                     dataId={this.props.stickerState.id} 
                     title={this.props.stickerState.title} 
-                    tasks={this.props.stickerState.tasks} 
+                    fill={this.props.stickerState.fill} 
                     closeSticker={this.closeSticker} 
                     stickerTaskCheck={this.props.stickerTaskCheck}/>
                 }
@@ -48,6 +48,7 @@ class StickerWriter extends React.Component {
             let taskItem = <li key={this.state.demoTasks.length + 1} className="task">{taskText.value}</li>
             this.state.demoTasks.push(taskItem);
             this.state.tasks.push({taskId: `#${this.state.tasks.length + 1}`, text: taskText.value, done: false})
+
             this.setState({
                 tasks: this.state.tasks,
                 demoTasks: this.state.demoTasks
@@ -63,7 +64,7 @@ class StickerWriter extends React.Component {
         let tasks = this.state.tasks;
         
         if(title.value && tasks.length > 0) {
-            this.props.stickersUpdate(title.value, tasks);
+            this.props.dataUpdater(title.value, tasks, 'stickers');
             title.value = '';
             document.getElementById('master_sticker__list').innerHTML = '';
 
@@ -115,7 +116,7 @@ class StickerReader extends React.Component {
                         <button id="sticker_close" onClick={this.props.closeSticker}>C</button>
                     </div>
                 <p id="master_sticker__title">{this.props.title}</p>
-                <ul id="master_sticker__list">{this.props.tasks.map(task => <li key={task.taskId} data-key={task.taskId} className={task.done ? 'task done' : 'task'}>{task.text}</li>)}</ul>
+                <ul id="master_sticker__list">{this.props.fill.map(task => <li key={task.taskId} data-key={task.taskId} className={task.done ? 'task done' : 'task'}>{task.text}</li>)}</ul>
             </div>
         )
     }

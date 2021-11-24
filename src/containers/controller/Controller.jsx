@@ -1,12 +1,9 @@
 import React from 'react';
 import './Controller.css';
 
-export default class Controller extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const Controller = ({writerModeOn, fullCleanUp}) => {
 
-    mainHandler = (el) => {
+    const mainHandler = (el) => {
         const controller = document.getElementById('controller');
         const noter = document.getElementById('noter');
         const sticker = document.getElementById('master_sticker');
@@ -14,30 +11,30 @@ export default class Controller extends React.Component {
 
         switch(el.target.id) {
             case "controller_noter":
-                this.props.noterWriterMode();
+                writerModeOn('noter');
                 noter.classList.add('show');
                 blocker.classList.add('active');
                 break;
             case "controller_sticker":
-                this.props.stickerWriterMode();
+                writerModeOn('sticker');
                 sticker.classList.add('show');
                 blocker.classList.add('active');
                 break;
             case "controller_cleaner":
-                this.props.fullCleanUp();
+                fullCleanUp();
                 break;
         }
 
         controller.classList.toggle('closed');
     }
-
-    render() {
-        return (
-            <div id="controller" className="closed" onClick={this.mainHandler}>
-                <button id="controller_sticker">Sticker</button>
-                <button id="controller_noter">Noter</button>
-                <button id="controller_cleaner">Trash</button>
-            </div>
-        )
-    }
+        
+    return (
+        <div id="controller" className="closed" onClick={mainHandler}>
+            <button id="controller_sticker">Sticker</button>
+            <button id="controller_noter">Noter</button>
+            <button id="controller_cleaner">Trash</button>
+        </div>
+    )
 }
+
+export default Controller;
