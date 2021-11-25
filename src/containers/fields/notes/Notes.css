@@ -1,7 +1,9 @@
 #notes {
-	width: 100%;
+	width: 550px;
 	height: 420px;
+	padding: 5px;
 
-	background-color: red;
+	background-color: var(--field-bg-color);
 	color: white;
+	border-radius: 5px;
 }

@@ -2,28 +2,25 @@ import React from 'react';
 import NoteUnit from '../../../components/NoteUnit.jsx';
 import './Notes.css';
 
-export default class Notes extends React.Component {
-	constructor(props) {
-		super(props);
-	}	
+const Notes = ({notesData, readerModeOn, deleteItem}) => {
 
-	eventHandler = (e) => {
+	const eventHandler = (e) => {
 		switch(e.target.className) {
 			case "note_unit":
-				this.props.readerModeOn(e, 'notes');
+				readerModeOn(e, 'notes');
 				break;
 			case "note_trash__button":
-				this.props.deleteItem(e, 'note');
+				deleteItem(e, 'note');
 				break;
 		}
 	}
 
-	render() {
-		return(
-			<div id="notes" onClick={this.eventHandler}>
-				{this.props.notesData.map(note => <NoteUnit key={note.unitId} unitId={note.unitId} unitTitle={note.unitTitle} unitDate={note.unitDate}/>)}
-			</div>
-		)
-	}
+	return(
+		<div id="notes" onClick={eventHandler}>
+			{notesData.map(note => <NoteUnit key={note.unitId} unitId={note.unitId} unitTitle={note.unitTitle} unitDate={note.unitDate}/>)}
+		</div>
+	)
 };
+
+export default Notes;
 

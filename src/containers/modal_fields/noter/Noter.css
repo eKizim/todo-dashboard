@@ -6,7 +6,8 @@
 	top: 630px;
 	right: 35px;
 	
-	background-color: rgb(161, 112, 21);
+	background-color: var(--modal-field-color);
+	border-radius: 5px;
 	transition: .2s;
 	opacity: .5;
 	pointer-events: none;
@@ -34,6 +35,12 @@
 	height: 25px;
 }
 
+#noter_buttons img {
+	width: 18px;
+	height: 18px;
+	pointer-events: none;
+}
+
 #noter_buttons__done {
 	margin-right: 5px;
 }
@@ -49,6 +56,7 @@
 #writer_title, #reader_title {
 	width: 100%;
 	height: 50px;
+	padding: 0 10px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 
@@ -56,16 +64,19 @@
 	align-items: center;
 
 	border: none;
-	background-color: rgb(177, 125, 30);
+	color: white;
+	background-color: var(--main-bg-color);
 	font-size: 21px;
 }
 
 #writer_textarea, #reader_text {
 	width: 100%;
 	height: 450px;
+	padding: 10px 10px;
 
 	border: none;
-	background-color: rgb(177, 125, 30);
+	color: white;
+	background-color: var(--main-bg-color);
 	font-size: 16px;
 	resize: none;
 }

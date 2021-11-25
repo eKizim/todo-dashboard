@@ -1,4 +1,8 @@
 import React from 'react';
+import MenuIcon from '../../images/Menu.svg';
+import StickerIcon from '../../images/Sticker.svg';
+import NoteIcon from '../../images/Note.svg';
+import TrashIcon from '../../images/Trash.svg';
 import './Controller.css';
 
 const Controller = ({writerModeOn, fullCleanUp}) => {
@@ -30,9 +34,10 @@ const Controller = ({writerModeOn, fullCleanUp}) => {
         
     return (
         <div id="controller" className="closed" onClick={mainHandler}>
-            <button id="controller_sticker">Sticker</button>
-            <button id="controller_noter">Noter</button>
-            <button id="controller_cleaner">Trash</button>
+            <img id="controller_menu__icon" src={MenuIcon} alt="menu-icon" />
+            <button id="controller_sticker"><img src={StickerIcon} alt="sticker-icon" /></button>
+            <button id="controller_noter"><img id="controller_noter__icon" src={NoteIcon} alt="note-icon" /></button>
+            <button id="controller_cleaner"><img src={TrashIcon} alt="trash-icon" /></button>
         </div>
     )
 }

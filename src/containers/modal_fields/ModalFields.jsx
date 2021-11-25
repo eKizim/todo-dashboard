@@ -3,25 +3,22 @@ import Noter from './noter/Noter.jsx';
 import MasterSticker from './master_sticker/MasterSticker.jsx';
 import './ModalFields.css';
 
-export default class ModalFields extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const ModalFields = ({dataUpdater, stickerState, noterState, stickerTaskCheck}) => {
 
-    render() {
-        return(
-            <React.Fragment>
-                <div id="modal_fields">
-                    <MasterSticker 
-                        dataUpdater={this.props.dataUpdater} 
-                        stickerState={this.props.stickerState} 
-                        stickerTaskCheck={this.props.stickerTaskCheck}/>
-                    <Noter 
-                        dataUpdater={this.props.dataUpdater} 
-                        noterState={this.props.noterState}/>
-                </div>
-                <div id="screen_blocker"></div>
-          </React.Fragment>
-        )
-    }
-}
+    return(
+        <React.Fragment>
+            <div id="modal_fields">
+                <MasterSticker 
+                    dataUpdater={dataUpdater} 
+                    stickerState={stickerState} 
+                    stickerTaskCheck={stickerTaskCheck}/>
+                <Noter 
+                    dataUpdater={dataUpdater} 
+                    noterState={noterState}/>
+            </div>
+            <div id="screen_blocker"></div>
+        </React.Fragment>
+    )
+};
+
+export default ModalFields;

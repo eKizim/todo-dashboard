@@ -9,8 +9,12 @@
     align-items: center;
     justify-content: center;
 
-    background-color: grey;
+    background-color: var(--dinamic-item);
     border-radius: 50%;
+}
+
+#controller:hover {
+    background-color: var(--dinamic-item-hover);
 }
 
 #controller button {
@@ -19,8 +23,14 @@
     position: absolute;
 
     border: none;
-    background-color: blue;
+    background-color: var(--dinamic-item);
     border-radius: 50%;
+}
+
+#controller img {
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
 }
 
 #controller_sticker {
@@ -31,6 +41,11 @@
 #controller_noter {
     right: 70px;
     top: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     transition: .2s;
     transition-delay: .1s;
 }
@@ -49,4 +64,13 @@
     pointer-events: none;
     visibility: hidden;
     z-index: -999px;
+}
+
+#controller_menu__icon {
+    transform: rotate(45deg);
+    transition: .3s;
+}
+
+#controller.closed #controller_menu__icon {
+    transform: rotate(0);
 }

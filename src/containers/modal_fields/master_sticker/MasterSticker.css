@@ -7,7 +7,7 @@
     left: -330px;
 
     border-radius: 15px;
-    background-color: rgb(27, 100, 66);
+    background-color: var(--modal-field-color);
     opacity: .5;
     transition: .2s;
     pointer-events: none;
@@ -25,6 +25,12 @@
     right: 10px;
 }
 
+#sticker_buttons img {
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+
 #sticker_close, #sticker_done {
     width: 25px;
     height: 25px;
@@ -34,6 +40,9 @@
 #master_sticker__title {
     width: 300px;
     margin-bottom: 15px;
+    
+    background-color: var(--main-bg-color);
+    border: none;
     font-size: 18px;
 }
 
@@ -45,11 +54,12 @@
 .task {
     margin-bottom: 5px;
     font-size: 16px;
+    cursor: pointer;
     transition: .1s;
 }
 
 .task.done {
-    color: green;
+    color: rgb(9, 198, 204);
     text-decoration: line-through;
 }
 
@@ -57,4 +67,7 @@
     width: 100%;
     height: 20px;
     margin-bottom: 10px;
+
+    background-color: var(--main-bg-color);
+    border: none;
 }

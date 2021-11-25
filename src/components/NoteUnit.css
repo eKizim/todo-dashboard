@@ -7,17 +7,38 @@
 	justify-content: space-between; 
 	align-items: center;
 
+	color: black;
 	border-bottom: 2px solid black;
-	background-color: #502177;
+	border-radius: 10px;
+	background-color: var(--dinamic-item);
 	transition: .2s;
 }
 
 .note_unit:hover {
-	background-color: #683890;
+	background-color: var(--dinamic-item-hover);
 }
 
 .note_unit__id, .note_unit__title, .note_unit__date {
 	pointer-events: none;
 }
 
+.note_trash__button {
+	width: 24px;
+	height: 24px;
+
+	background-color: transparent;
+	border: none;
+	border-radius: 50%;
+	transition: .1s;
+}
+
+.note_trash__button img {
+	width: 18px;
+	height: 18px;
+	pointer-events: none;
+}
+
+.note_trash__button:hover {
+	background-color: var(--dinamic-item-hover);
+}
 
