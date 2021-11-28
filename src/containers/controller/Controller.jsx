@@ -34,7 +34,8 @@ const Controller = ({writerModeOn, fullCleanUp}) => {
         
     return (
         <div id="controller" className="closed" onClick={mainHandler}>
-            <img id="controller_menu__icon" src={MenuIcon} alt="menu-icon" />
+            {/*<img id="controller_menu__icon" src={MenuIcon} alt="menu-icon" />*/}
+            <span id="controller_burger-menu"></span>
             <button id="controller_sticker"><img src={StickerIcon} alt="sticker-icon" /></button>
             <button id="controller_noter"><img id="controller_noter__icon" src={NoteIcon} alt="note-icon" /></button>
             <button id="controller_cleaner"><img src={TrashIcon} alt="trash-icon" /></button>

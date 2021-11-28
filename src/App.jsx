@@ -7,10 +7,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notesData: window.localStorage.notes ?
-        JSON.parse(window.localStorage.notes) : [],
-      stickersData: window.localStorage.stickers ?
-        JSON.parse(window.localStorage.stickers) : [],
+      notesData: [],
+      stickersData: [],
       
       stickerState: {
         mode: 'input',
@@ -29,6 +27,21 @@ export default class App extends React.Component {
 
     this.dataUpdater = this.dataUpdater.bind(this);
     this.fullCleanUp = this.fullCleanUp.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      if(window.sessionStorage.notes) {
+        this.setState({
+          notesData: JSON.parse(window.sessionStorage.notes),
+        });
+      }
+      if(window.sessionStorage.stickers) {
+        this.setState({
+          stickersData: JSON.parse(window.sessionStorage.stickers)
+        })
+      }
+    }, 150);
   }
 
   dataUpdater = (_title, _fill, _type) => {
@@ -53,16 +66,16 @@ export default class App extends React.Component {
         console.log(`#--STICKERS HAS BEEN UPDATED--#`);
         break;
     }
-    window.localStorage.setItem(_type, JSON.stringify(storage));
+    window.sessionStorage.setItem(_type, JSON.stringify(storage));
   }
 
   fullCleanUp() {
-    if(confirm('You really want to delete all notes and stickers?')) {
+    if(confirm('Do you really want to delete all notes and stickers?')) {
       this.setState({
         stickersData: [],
         notesData: []
       });
-      window.localStorage.clear();
+      window.sessionStorage.clear();
     }
   }
 
@@ -78,38 +91,35 @@ export default class App extends React.Component {
   }
 
   readerModeOn = (_e, _target) => {
-    const storage = JSON.parse(window.localStorage.getItem(_target));
+    const storage = JSON.parse(window.sessionStorage.getItem(_target));
     const filter = storage.find(item => item.unitId === Number(_e.target.firstChild.innerText));
 
     switch(_target) {
       case "notes":
-          this.setState({
-            noterState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
-          });
-        
+        this.setState({
+          noterState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
+        });
         document.getElementById('screen_blocker').classList.add('active');
         document.getElementById('noter').classList.add('show');
         break;
-
       case "stickers":
         this.setState({
           stickerState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
         });
-        
         document.getElementById('screen_blocker').classList.add('active');
         document.getElementById('master_sticker').classList.add('show');
         break;
     }
   }
 
-  //### FIND BETTER SOLUTION
-  stickerTaskCheck = (e) => {
-    let storage = JSON.parse(window.localStorage.stickers);
+  //### REWRITE FUNCTION ###
+  stickerTaskCheck = (_e) => {
+    let storage = JSON.parse(window.sessionStorage.stickers);
     
     storage.forEach(sticker => {
       if(sticker.unitId === Number(document.getElementById('sticker_reader').dataset.stickerId)) {
         sticker.unitFill.forEach(task => {
-          if(task.taskId === e.target.dataset.key) {
+          if(task.taskId === _e.target.dataset.key) {
             task.done = !task.done;
           }
           
@@ -128,11 +138,11 @@ export default class App extends React.Component {
     this.setState({
       stickersData: storage
     });
-    window.localStorage.stickers = JSON.stringify(storage);
+    window.sessionStorage.stickers = JSON.stringify(storage);
   }
 
   deleteItem = (_e, _target) => {
-    const storage = JSON.parse(window.localStorage.getItem(`${_target}s`));
+    const storage = JSON.parse(window.sessionStorage.getItem(`${_target}s`));
     const rUnit = _e.target.closest(`.${_target}_unit`);
     
     const filteredStorage = storage.filter(item => item.unitId !==Number(rUnit.firstChild.textContent));
@@ -147,7 +157,7 @@ export default class App extends React.Component {
           break;
     }
 
-    window.localStorage.setItem(`${_target}s`, JSON.stringify(filteredStorage));
+    window.sessionStorage.setItem(`${_target}s`, JSON.stringify(filteredStorage));
   }
 
   render() {

@@ -7,14 +7,14 @@ window.addEventListener('DOMContentLoaded', () => {
       
       const storage = JSON.parse(data);
         
-      window.localStorage.notes = JSON.stringify(storage.notes);
-      window.localStorage.stickers = JSON.stringify(storage.stickers);
+      window.sessionStorage.notes = JSON.stringify(storage.notes);
+      window.sessionStorage.stickers = JSON.stringify(storage.stickers);
    }) 
 })
 
 window.addEventListener('beforeunload', () => {
-    const notes = window.localStorage.notes ? JSON.parse(window.localStorage.notes) : [];
-    const stickers = window.localStorage.stickers ? JSON.parse(window.localStorage.stickers) : [];
+    const notes = window.sessionStorage.notes ? JSON.parse(window.sessionStorage.notes) : [];
+    const stickers = window.sessionStorage.stickers ? JSON.parse(window.sessionStorage.stickers) : [];
 
     const storage = {
         notes: notes,
