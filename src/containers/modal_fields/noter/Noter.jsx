@@ -7,7 +7,7 @@ const Noter = ({noterState, dataUpdater}) => {
 
   const closeNoter = () => {
     document.getElementById('noter').classList.remove('show');
-    document.getElementById('screen_blocker').classList.remove('active');
+    document.getElementById('modal_fields').classList.remove('active');
   }
 
   return (
@@ -50,8 +50,6 @@ const Writer = ({dataUpdater, closeNoter}) => {
       </div>
       <input id="writer_title" type="text" placeholder="Write your note title here" />
       <textarea id="writer_textarea" placeholder="Write your note here"></textarea>
-      <div id="writer_buttons">{/*?????*/}
-      </div>
     </div>
   )
 }
@@ -61,7 +59,7 @@ const Reader = ({noterState, closeNoter}) => {
     return (
       <div id="reader">
         <div id="noter_buttons">
-            <button id="noter_buttons__cancel" onClick={closeNoter}>C</button>
+            <button id="noter_buttons__cancel" onClick={closeNoter}><img src={CancelIcon} alt="cansel-icon"/></button>
         </div>
         <p id="reader_title">{noterState.title}</p>
         <p id="reader_text">{noterState.fill}</p>

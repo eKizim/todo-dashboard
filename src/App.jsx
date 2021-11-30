@@ -99,14 +99,14 @@ export default class App extends React.Component {
         this.setState({
           noterState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
         });
-        document.getElementById('screen_blocker').classList.add('active');
+        document.getElementById('modal_fields').classList.add('active');
         document.getElementById('noter').classList.add('show');
         break;
       case "stickers":
         this.setState({
           stickerState: {mode: 'read', id: filter.unitId, title: filter.unitTitle, fill: filter.unitFill}
         });
-        document.getElementById('screen_blocker').classList.add('active');
+        document.getElementById('modal_fields').classList.add('active');
         document.getElementById('master_sticker').classList.add('show');
         break;
     }

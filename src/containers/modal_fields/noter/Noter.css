@@ -1,5 +1,6 @@
 #noter {
-	width: 600px;
+	max-width: 600px;
+	width: 90%;
 	height: 590px;
 	
 	position: absolute;
@@ -14,9 +15,27 @@
 }
 
 #noter.show {
-	top: 50px;
+	top: 40px;
 	opacity: 1;
 	pointer-events: all;
+}
+
+@media screen and (max-width: 992px) {
+	#noter {
+		margin: auto;
+		position: relative;
+		left: 0;
+		visibility: hidden;
+	}
+	#noter.show {
+		top: -350px;
+		visibility: visible;
+	}
+}
+@media screen and (max-width: 576px) {
+	#noter.show {
+		top: -250px;
+	}
 }
 
 #noter_buttons {
@@ -33,6 +52,9 @@
 #noter_buttons button {
 	width: 25px;
 	height: 25px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
 }
 
 #noter_buttons img {
@@ -65,8 +87,18 @@
 
 	border: none;
 	color: white;
-	background-color: var(--main-bg-color);
+	background-color: var(--modal-field-color);
+	border-bottom: solid 2px var(--field-bg-color);
 	font-size: 21px;
+}
+
+#reader_title {
+	height: auto;
+	padding: 10px;
+	align-items: normal;
+	overflow-y: auto;
+	overflow-wrap: anywhere;/* ?????? */
+	hyphens: auto;
 }
 
 #writer_textarea, #reader_text {
@@ -76,7 +108,11 @@
 
 	border: none;
 	color: white;
-	background-color: var(--main-bg-color);
+	background-color: var(--modal-field-color);
 	font-size: 16px;
+	outline: none;
+	overflow-y: auto;
+	word-wrap: break-word;
+	hyphens: auto;
 	resize: none;
 }

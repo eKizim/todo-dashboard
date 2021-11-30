@@ -16,7 +16,6 @@ const ModalFields = ({dataUpdater, stickerState, noterState, stickerTaskCheck}) 
                     dataUpdater={dataUpdater} 
                     noterState={noterState}/>
             </div>
-            <div id="screen_blocker"></div>
         </React.Fragment>
     )
 };

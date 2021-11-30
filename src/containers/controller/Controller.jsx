@@ -11,7 +11,7 @@ const Controller = ({writerModeOn, fullCleanUp}) => {
         const controller = document.getElementById('controller');
         const noter = document.getElementById('noter');
         const sticker = document.getElementById('master_sticker');
-        const blocker = document.getElementById('screen_blocker');
+        const blocker = document.getElementById('modal_fields');
 
         switch(el.target.id) {
             case "controller_noter":
@@ -34,7 +34,6 @@ const Controller = ({writerModeOn, fullCleanUp}) => {
         
     return (
         <div id="controller" className="closed" onClick={mainHandler}>
-            {/*<img id="controller_menu__icon" src={MenuIcon} alt="menu-icon" />*/}
             <span id="controller_burger-menu"></span>
             <button id="controller_sticker"><img src={StickerIcon} alt="sticker-icon" /></button>
             <button id="controller_noter"><img id="controller_noter__icon" src={NoteIcon} alt="note-icon" /></button>

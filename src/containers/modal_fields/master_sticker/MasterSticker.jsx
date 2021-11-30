@@ -6,7 +6,7 @@ import './MasterSticker.css';
 const MasterSticker = ({dataUpdater, stickerState, stickerTaskCheck}) => {
     const closeSticker = () => {
         document.getElementById('master_sticker').classList.remove('show');
-        document.getElementById('screen_blocker').classList.remove('active');
+        document.getElementById('modal_fields').classList.remove('active');
     }
 
     return (

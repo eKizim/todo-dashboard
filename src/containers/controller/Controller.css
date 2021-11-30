@@ -12,16 +12,7 @@
     background-color: var(--dinamic-item);
     box-shadow: 2px 2px 5px black;
     border-radius: 50%;
-}
-
-#controller.closed button {
-    top: 5px;
-    right: 5px;
-    opacity: 0;
-    transition: .1s;
-    pointer-events: none;
-    visibility: hidden;
-    z-index: -999;
+    z-index: 10;
 }
 
 #controller_burger-menu {
@@ -46,11 +37,11 @@
 
 #controller_burger-menu::before {
     top: 0;
-    transform: rotate(-220deg);
+    transform: rotate(-45deg);
 }
 #controller_burger-menu::after {
     top: 0;
-    transform: rotate(220deg);
+    transform: rotate(45deg);
 }
 
 #controller.closed #controller_burger-menu {
@@ -107,4 +98,28 @@
 #controller_cleaner {
     top: 100px;
     transition-delay: .2s !important;
+}
+
+@media screen and (max-width: 576px) {
+    #controller_sticker {
+        top: 150px;
+        right: 0;
+    }
+    #controller_noter {
+        top: 100px;
+        right: 0;
+    }
+    #controller_cleaner {
+        top: 50px;
+    }
+}
+
+#controller.closed button {
+    top: 5px;
+    right: 5px;
+    opacity: 0;
+    transition: .1s;
+    pointer-events: none;
+    visibility: hidden;
+    z-index: -999;
 }

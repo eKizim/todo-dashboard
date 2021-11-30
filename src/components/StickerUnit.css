@@ -1,11 +1,11 @@
 .sticker_unit {
-	width: 160px;
-	height: 160px;
+	min-width: 150px;
+	height: 150px;
 	padding: 10px;
 	position: relative;
 
 	background-color: var(--dinamic-item);
-	box-shadow: -5px 3px 10px black;
+	box-shadow: 0 5px 5px black;
 	border-radius: 15px;
 	transition: .2s;
 }
@@ -16,15 +16,20 @@
 
 .sticker_unit:hover {
 	background-color: var(--dinamic-item-hover);
+	transform: translateX(-3px) translateY(-3px) rotate(-5deg);
 }
-
-.sticker_unit:hover {
-	margin-left: 5px;
+.sticker_unit:hover~.sticker_unit {
+	transform: translateX(60px);
 }
 
 .sticker_unit__title {
-	display: inline;
+	max-width: 120px;
+	height: 55px;
+	display: block;
 	font-size: 16px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	hyphens: auto;
 	pointer-events: none;
 }
 
@@ -37,6 +42,9 @@
 	position: absolute;
 	top: 10px;
 	right: 10px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
 }
 
 .sticker_unit__delete-button img {
