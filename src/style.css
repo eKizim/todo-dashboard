@@ -1,9 +1,8 @@
 :root {
 	/*Color palette*/
-	--main-bg-color: #28273E;
-	--field-bg-color: #1D1C28;
-	--modal-field-color: #868483;
-	--dinamic-item: #C4C4C4;
+	--main-bg-color: #0c0c13;
+	--field-bg-color: #242433;
+	--dinamic-item: #d8d8d8;
 	--dinamic-item-hover: #f7f7f7;
 }
 

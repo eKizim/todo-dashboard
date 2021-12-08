@@ -112,10 +112,9 @@ export default class App extends React.Component {
     }
   }
 
-  //### REWRITE FUNCTION ###
   stickerTaskCheck = (_e) => {
     let storage = JSON.parse(window.sessionStorage.stickers);
-    
+
     storage.forEach(sticker => {
       if(sticker.unitId === Number(document.getElementById('sticker_reader').dataset.stickerId)) {
         sticker.unitFill.forEach(task => {
@@ -174,7 +173,6 @@ export default class App extends React.Component {
           dataUpdater={this.dataUpdater}/>
         
         <Fields 
-          notesData={this.state.notesData}
           stickersData={this.state.stickersData}
           readerModeOn={this.readerModeOn}
           deleteItem={this.deleteItem}/>

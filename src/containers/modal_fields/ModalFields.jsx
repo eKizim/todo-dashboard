@@ -3,7 +3,7 @@ import Noter from './noter/Noter.jsx';
 import MasterSticker from './master_sticker/MasterSticker.jsx';
 import './ModalFields.css';
 
-const ModalFields = ({dataUpdater, stickerState, noterState, stickerTaskCheck}) => {
+export default function ModalFields({dataUpdater, stickerState, noterState, stickerTaskCheck}) {
 
     return(
         <React.Fragment>
@@ -19,5 +19,3 @@ const ModalFields = ({dataUpdater, stickerState, noterState, stickerTaskCheck}) 
         </React.Fragment>
     )
 };
-
-export default ModalFields;

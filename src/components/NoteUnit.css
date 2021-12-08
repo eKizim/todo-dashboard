@@ -11,14 +11,14 @@
 	border-bottom: 2px solid black;
 	border-radius: 10px;
 	background-color: var(--dinamic-item);
-	box-shadow: inset 1px 1px 5px black;
+	box-shadow: 1px 1px 5px black;
 	transition: .2s;
 }
 
 .note_unit:hover {
 	box-shadow: none;
 	background-color: var(--dinamic-item-hover);
-	transform: translateX(-15px);
+	transform: translateX(-5px);
 }
 
 .note_unit__id, .note_unit__title, .note_unit__date {

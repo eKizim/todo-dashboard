@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: 'development',
@@ -17,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(js|jsx)/,
@@ -33,6 +34,11 @@ module.exports = {
 
   devtool: 'inline-source-map',
 
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+    minimize: true
+  },
+
   devServer: {
     port: 3000,
     static: './dist',
@@ -44,7 +50,8 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico',
       inject: 'body'
-    })
+    }),
+    new MiniCssExtractPlugin()
   ]
 }
 

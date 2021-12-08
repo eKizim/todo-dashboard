@@ -7,7 +7,7 @@
 	top: 630px;
 	right: 35px;
 	
-	background-color: var(--modal-field-color);
+	background-color: var(--dinamic-item);
 	border-radius: 5px;
 	transition: .2s;
 	opacity: .5;
@@ -86,8 +86,8 @@
 	align-items: center;
 
 	border: none;
-	color: white;
-	background-color: var(--modal-field-color);
+	color: black;
+	background-color: transparent;
 	border-bottom: solid 2px var(--field-bg-color);
 	font-size: 21px;
 }
@@ -107,8 +107,8 @@
 	padding: 10px 10px;
 
 	border: none;
-	color: white;
-	background-color: var(--modal-field-color);
+	color: black;
+	background-color: var(--dinamic-item);
 	font-size: 16px;
 	outline: none;
 	overflow-y: auto;

@@ -3,19 +3,13 @@ import Notes from './notes/Notes.jsx';
 import Stickers from './stickers/Stickers.jsx';
 import './Fields.css';
 
-const Fields = ({stickersData, notesData, deleteItem, readerModeOn}) => {
+export default function Fields({ deleteItem }) {
     return (
       <div id="fields">
         <Stickers 
-          stickersData={stickersData} 
-          deleteItem={deleteItem} 
-          readerModeOn={readerModeOn}/>
+          deleteItem={deleteItem}/>
         <Notes 
-          notesData={notesData} 
-          deleteItem={deleteItem} 
-          readerModeOn={readerModeOn}/>
+          deleteItem={deleteItem}/>
       </div>
     )
   }
-
-  export default Fields;

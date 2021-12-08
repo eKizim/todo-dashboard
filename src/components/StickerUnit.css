@@ -16,7 +16,6 @@
 
 .sticker_unit:hover {
 	background-color: var(--dinamic-item-hover);
-	transform: translateX(-3px) translateY(-3px) rotate(-5deg);
 }
 .sticker_unit:hover~.sticker_unit {
 	transform: translateX(60px);

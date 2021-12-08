@@ -7,7 +7,7 @@
     left: -330px;
 
     border-radius: 15px;
-    background-color: var(--modal-field-color);
+    background-color: var(--dinamic-item);
     opacity: .5;
     transition: .2s;
     overflow-y: auto;
@@ -99,7 +99,6 @@
 }
 
 .task.done {
-    color: rgb(9, 198, 204);
     text-decoration: line-through;
 }
 

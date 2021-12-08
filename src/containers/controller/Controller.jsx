@@ -1,26 +1,25 @@
 import React from 'react';
-import MenuIcon from '../../images/Menu.svg';
 import StickerIcon from '../../images/Sticker.svg';
 import NoteIcon from '../../images/Note.svg';
 import TrashIcon from '../../images/Trash.svg';
 import './Controller.css';
 
-const Controller = ({writerModeOn, fullCleanUp}) => {
 
-    const mainHandler = (el) => {
+export default function Controller({fullCleanUp}) {
+
+
+    const mainHandler = (_el) => {
         const controller = document.getElementById('controller');
         const noter = document.getElementById('noter');
         const sticker = document.getElementById('master_sticker');
         const blocker = document.getElementById('modal_fields');
 
-        switch(el.target.id) {
+        switch(_el.target.id) {
             case "controller_noter":
-                writerModeOn('noter');
                 noter.classList.add('show');
                 blocker.classList.add('active');
                 break;
             case "controller_sticker":
-                writerModeOn('sticker');
                 sticker.classList.add('show');
                 blocker.classList.add('active');
                 break;
@@ -28,7 +27,6 @@ const Controller = ({writerModeOn, fullCleanUp}) => {
                 fullCleanUp();
                 break;
         }
-
         controller.classList.toggle('closed');
     }
         
@@ -41,5 +39,3 @@ const Controller = ({writerModeOn, fullCleanUp}) => {
         </div>
     )
 }
-
-export default Controller;
