@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNote } from '../../../store/notesData.jsx';
-import { writeNoteMode } from '../../../store/noterSlice.jsx';
+import { addNote, writeNoteMode } from '../../../store/notesSlice.jsx';
 import DoneIcon from '../../../images/Done.svg';
 import CancelIcon from '../../../images/Trash.svg';
 import './Noter.css';
 
 export default function Noter() {
-  const noterState = useSelector(state => state.noterState);
+  const noterState = useSelector(state => state.notes.noterState);
   const dispatch = useDispatch();
 
   const closeNoter = () => {
@@ -16,23 +15,27 @@ export default function Noter() {
     document.getElementById('modal_fields').classList.remove('active');
   }
 
+  const noterMode = noterState.mode === 'input' ? 
+  <Writer closeNoter={closeNoter}/> : 
+  <Reader title={noterState.title} text={noterState.text} closeNoter={closeNoter}/>
+
   return (
       <div id="noter">
-        {noterState.mode === 'input' ? 
-        <Writer 
-          closeNoter={closeNoter}/> 
-          : 
-        <Reader 
-          noterState={noterState}
-          closeNoter={closeNoter}/>}
+        { noterMode }
       </div>
   )
 }
 
 
-const Writer = ({closeNoter}) => {
-  const notesData = useSelector(state => state.notesData);
+function Writer({ closeNoter }) {
+  const notesData = useSelector(state => state.notes.notesData);
   const dispatch = useDispatch();
+
+  const closeWriter = () => {
+    document.getElementById('writer_title').value = '';
+    document.getElementById('writer_textarea').value = '';
+    closeNoter();
+  }
 
   const writeNote = () => {
     const title = document.getElementById('writer_title');
@@ -50,9 +53,7 @@ const Writer = ({closeNoter}) => {
       }
 
       dispatch(addNote(newNote));
-      title.value = '';
-      text.value = '';
-      closeNoter();
+      closeWriter();
     } else {
       console.log('#--EMPTY FIELDS--#')
     }
@@ -61,8 +62,12 @@ const Writer = ({closeNoter}) => {
   return (
     <div id="writer">
       <div id="noter_buttons">
-        <button id="noter_buttons__done" onClick={writeNote}><img src={DoneIcon} alt="done-icon" /></button>
-        <button id="noter_buttons__cancel" onClick={closeNoter}><img src={CancelIcon} alt="cancel-icon" /></button>
+        <button id="noter_buttons__done" onClick={writeNote}>
+          <img src={DoneIcon} alt="done-icon" />
+        </button>
+        <button id="noter_buttons__cancel" onClick={closeNoter}>
+          <img src={CancelIcon} alt="cancel-icon" />
+        </button>
       </div>
       <input id="writer_title" type="text" placeholder="Write your note title here" />
       <textarea id="writer_textarea" placeholder="Write your note here"></textarea>
@@ -71,14 +76,16 @@ const Writer = ({closeNoter}) => {
 }
 
 
-const Reader = ({noterState, closeNoter}) => {
+function Reader({title, text, closeNoter}) {
     return (
       <div id="reader">
         <div id="noter_buttons">
-            <button id="noter_buttons__cancel" onClick={closeNoter}><img src={CancelIcon} alt="cansel-icon"/></button>
+            <button id="noter_buttons__cancel" onClick={closeNoter}>
+              <img src={CancelIcon} alt="cansel-icon"/>
+            </button>
         </div>
-        <p id="reader_title">{noterState.title}</p>
-        <p id="reader_text">{noterState.text}</p>
+        <p id="reader_title">{title}</p>
+        <p id="reader_text">{text}</p>
       </div>
   )
 }

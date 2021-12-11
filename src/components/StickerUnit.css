@@ -18,7 +18,7 @@
 	background-color: var(--dinamic-item-hover);
 }
 .sticker_unit:hover~.sticker_unit {
-	transform: translateX(60px);
+	transform: translateX(70px);
 }
 
 .sticker_unit__title {
