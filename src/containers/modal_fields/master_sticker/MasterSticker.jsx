@@ -9,21 +9,23 @@ export default function MasterSticker() {
     const stickerState = useSelector(state => state.stickers.masterStickerState);
 
     const closeSticker = () => {
-        document.getElementById('master_sticker').classList.remove('show');
+	const masterSticker = document.getElementById('master_sticker');
+        masterSticker.classList.remove('show');
+	masterSticker.ontransitionend = '';
         document.getElementById('modal_fields').classList.remove('active');
-    }
+    };
 
     // If sticker mode is 'input' -- show StickerWriter 
     // Else -- show StickerReader
     const masterStickerMode = stickerState.mode === 'input' ?
     <StickerWriter closeSticker={closeSticker}/> :
-    <StickerReader stickerId={stickerState.id} title={stickerState.title} tasks={stickerState.tasks} closeSticker={closeSticker}/>
+    <StickerReader stickerId={stickerState.id} title={stickerState.title} tasks={stickerState.tasks} closeSticker={closeSticker}/>;
 
     return (
         <div id="master_sticker">
             { masterStickerMode }
         </div>
-    )
+    );
 }
 
 
@@ -38,21 +40,21 @@ function StickerWriter({ closeSticker }) {
         document.getElementById('sticker_task-input').value = '';
         setTasks([]);
         closeSticker();
-    }
+    };
 
     // Push new task to task list
-    const taskPush = (e) => {
-        e.preventDefault();
+    const taskPush = (_e) => {
+        _e.preventDefault();
         
         let taskText = document.getElementById('sticker_task-input');
         if(taskText.value) {
-            tasks.push({taskId: `#${tasks.length + 1}`, text: taskText.value, done: false})
-            setTasks([...tasks]);
+            let newTask = {taskId: `#${tasks.length + 1}`, text: taskText.value, done: false};
+            setTasks([...tasks, newTask]);
             taskText.value = '';
         } else {
             console.log(`#--EMPTY INPUT--#`);
         }
-    }
+    };
 
     const writeSticker = () => {
         let title = document.getElementById('master_sticker__title');
@@ -66,14 +68,14 @@ function StickerWriter({ closeSticker }) {
                 unitTitle: title.value,
                 unitTasks: tasks,
                 unitDate: date
-            }
+            };
 
             dispatch(addSticker(newSticker));
             clearSticker();
         } else {
-            console.log(`#--EMPTY FIELDS--#`)
+            console.log(`#--EMPTY FIELDS--#`);
         }
-    }
+    };
 
     const renderedTasks = tasks.map(item => <li key={item.taskId} className="task">{item.text}</li>);
 
@@ -89,7 +91,7 @@ function StickerWriter({ closeSticker }) {
                 <input type="text" id="sticker_task-input" />
             </form>
         </div>
-    )
+    );
 }
 
 
@@ -100,7 +102,7 @@ function StickerReader({ closeSticker, stickerId }) {
     const closeStickerReader = () => {
         dispatch(writeStickerMode());
         closeSticker();
-    }
+    };
 
     const taskCheck = (_target) => {
 
@@ -109,16 +111,15 @@ function StickerReader({ closeSticker, stickerId }) {
         const taskIndex = chosenSticker.unitTasks.indexOf(checkedTask);
 
         dispatch(stickerTaskCheck({stickerId, taskIndex}));
-    }
+    };
 
     const eventHandler = (e) => {
         if(e.target.classList.contains('task')) {
             return taskCheck(e.target); 
         }
-    }
+    };
 
-
-    const renderedTasks = chosenSticker.unitTasks.map(task => <li key={task.taskId} data-key={task.taskId} className={task.done ? 'task done' : 'task'}>{task.text}</li>)
+    const renderedTasks = chosenSticker.unitTasks.map(task => <li key={task.taskId} data-key={task.taskId} className={task.done ? 'task done' : 'task'}>{task.text}</li>);
 
     return (
         <div id="sticker_reader" data-sticker-id={stickerId} onClick={eventHandler}>
@@ -128,5 +129,5 @@ function StickerReader({ closeSticker, stickerId }) {
             <p id="master_sticker__title">{chosenSticker.unitTitle}</p>
             <ul id="master_sticker__list">{renderedTasks}</ul>
         </div>
-    )
+    );
 };

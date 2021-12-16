@@ -20,11 +20,21 @@ export default function Controller() {
         switch(_el.target.id) {
             case "controller_noter":
                 noter.classList.add('show');
+
+	        noter.ontransitionend = () => {
+	            document.getElementById('writer_title').focus();
+		};
+
                 blocker.classList.add('active');
                 break;
             case "controller_sticker":
                 sticker.classList.add('show');
-                blocker.classList.add('active');
+                
+	        sticker.ontransitionend = () => {
+		   document.getElementById('master_sticker__title').focus();
+		}
+
+	        blocker.classList.add('active');
                 break;
             case "controller_cleaner":
                 if(confirm("Are you sure?")) {

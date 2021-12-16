@@ -11,7 +11,10 @@ export default function Noter() {
 
   const closeNoter = () => {
     dispatch(writeNoteMode());
-    document.getElementById('noter').classList.remove('show');
+    const noter = document.getElementById('noter');
+    noter.classList.remove('show');
+    noter.ontransitionend = '';
+    
     document.getElementById('modal_fields').classList.remove('active');
   }
 
@@ -32,8 +35,10 @@ function Writer({ closeNoter }) {
   const dispatch = useDispatch();
 
   const closeWriter = () => {
-    document.getElementById('writer_title').value = '';
-    document.getElementById('writer_textarea').value = '';
+    const writerTitle = document.getElementById('writer_title');
+    const writerTextarea =  document.getElementById('writer_textarea');
+    writerTitle.value = '';
+    writerTextarea.value = '';
     closeNoter();
   }
 

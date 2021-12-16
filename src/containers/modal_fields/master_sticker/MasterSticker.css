@@ -77,8 +77,8 @@
     
     font-size: 18px;
     overflow: hidden;
-	overflow-wrap: break-word;
-	hyphens: auto;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 #master_sticker__list {
@@ -92,8 +92,8 @@
     margin-bottom: 5px;
     font-size: 16px;
     overflow: hidden;
-	overflow-wrap: break-word;
-	hyphens: auto;
+    overflow-wrap: break-word;
+    hyphens: auto;
     cursor: pointer;
     transition: .1s;
 }
