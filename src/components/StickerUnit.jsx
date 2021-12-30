@@ -10,6 +10,6 @@ export default function Sticker({unitId, unitTitle, unitDate}) {
 			<p className="sticker_unit__title">{unitTitle}</p>
 			<button className="sticker_unit__delete-button"><img src={TrashIcon} alt="trash-icon" /></button>
 		</div>
-	)
+	);
 }	
 

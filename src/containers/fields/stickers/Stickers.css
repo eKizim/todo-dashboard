@@ -9,7 +9,7 @@
 	align-items: center;
 
 	background-color: var(--field-bg-color);
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: inset 3px 3px 5px black;
 	overflow-x: auto;
 	scrollbar-width: none;

@@ -8,20 +8,20 @@
 	align-items: center;
 
 	color: black;
-	border-bottom: 2px solid black;
-	border-radius: 10px;
+	border-radius: 5px;
 	background-color: var(--dinamic-item);
 	box-shadow: 1px 1px 5px black;
 	transition: .2s;
 }
 
 .note_unit:hover {
-	box-shadow: none;
 	background-color: var(--dinamic-item-hover);
 	transform: translateX(-5px);
 }
 
-.note_unit__id, .note_unit__title, .note_unit__date {
+.note_unit__id, 
+.note_unit__title, 
+.note_unit__date {
 	pointer-events: none;
 }
 

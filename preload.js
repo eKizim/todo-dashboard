@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 window.addEventListener('DOMContentLoaded', () => {
-   fs.readFile(path.join(__dirname, './data/storage.json'), 'utf-8', (err, data) => { 
+   fs.readFile(path.join(__dirname, './storage/storage.json'), 'utf-8', (err, data) => { 
       if(err) console.log(err);
       
       const storage = JSON.parse(data);
@@ -22,7 +22,7 @@ window.addEventListener('beforeunload', () => {
     }
 
     const data = JSON.stringify(storage, null, 4);
-    fs.writeFile(path.join(__dirname, './data/storage.json'), data, (err) => {
+    fs.writeFile(path.join(__dirname, './storage/storage.json'), data, (err) => {
         if(err) alert(err);
     })
 })

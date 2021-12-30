@@ -10,5 +10,5 @@ export default function Note({unitId, unitTitle, unitDate}) {
 			<p className="note_unit__date">{unitDate}</p>
 			<button className="note_trash__button"><img src={TrashIcon} alt="trash-icon" /></button>
 		</div>
-	)
+	);
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote, writeNoteMode } from '../../../store/notesSlice.jsx';
 import DoneIcon from '../../../images/Done.svg';
-import CancelIcon from '../../../images/Trash.svg';
+import CancelIcon from '../../../images/close.svg';
 import './Noter.css';
 
 export default function Noter() {
@@ -13,20 +13,19 @@ export default function Noter() {
     dispatch(writeNoteMode());
     const noter = document.getElementById('noter');
     noter.classList.remove('show');
-    noter.ontransitionend = '';
     
     document.getElementById('modal_fields').classList.remove('active');
-  }
+  };
 
   const noterMode = noterState.mode === 'input' ? 
   <Writer closeNoter={closeNoter}/> : 
-  <Reader title={noterState.title} text={noterState.text} closeNoter={closeNoter}/>
+  <Reader title={noterState.title} text={noterState.text} closeNoter={closeNoter}/>;
 
   return (
       <div id="noter">
         { noterMode }
       </div>
-  )
+  );
 }
 
 
@@ -34,13 +33,14 @@ function Writer({ closeNoter }) {
   const notesData = useSelector(state => state.notes.notesData);
   const dispatch = useDispatch();
 
+
   const closeWriter = () => {
     const writerTitle = document.getElementById('writer_title');
     const writerTextarea =  document.getElementById('writer_textarea');
     writerTitle.value = '';
     writerTextarea.value = '';
     closeNoter();
-  }
+  };
 
   const writeNote = () => {
     const title = document.getElementById('writer_title');
@@ -55,14 +55,14 @@ function Writer({ closeNoter }) {
         unitTitle: title.value,
         unitText: text.value,
         unitDate: date
-      }
+      };
 
       dispatch(addNote(newNote));
       closeWriter();
     } else {
-      console.log('#--EMPTY FIELDS--#')
+      console.log('#--EMPTY FIELDS--#');
     }
-  }
+  };
 
   return (
     <div id="writer">
@@ -77,7 +77,7 @@ function Writer({ closeNoter }) {
       <input id="writer_title" type="text" placeholder="Write your note title here" />
       <textarea id="writer_textarea" placeholder="Write your note here"></textarea>
     </div>
-  )
+  );
 }
 
 
@@ -92,6 +92,6 @@ function Reader({title, text, closeNoter}) {
         <p id="reader_title">{title}</p>
         <p id="reader_text">{text}</p>
       </div>
-  )
+  );
 }
 

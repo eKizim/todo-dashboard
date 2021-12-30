@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addSticker, writeStickerMode, stickerTaskCheck } from '../../../store/stickersSlice.jsx';
 import DoneIcon from '../../../images/Done.svg';
-import CancelIcon from '../../../images/Trash.svg';
+import CancelIcon from '../../../images/close.svg';
 import './MasterSticker.css';
 
 export default function MasterSticker() {
@@ -11,7 +11,6 @@ export default function MasterSticker() {
     const closeSticker = () => {
 	const masterSticker = document.getElementById('master_sticker');
         masterSticker.classList.remove('show');
-	masterSticker.ontransitionend = '';
         document.getElementById('modal_fields').classList.remove('active');
     };
 

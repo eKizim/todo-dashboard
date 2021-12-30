@@ -20,22 +20,20 @@ export default function Controller() {
         switch(_el.target.id) {
             case "controller_noter":
                 noter.classList.add('show');
-
-	        noter.ontransitionend = () => {
-	            document.getElementById('writer_title').focus();
-		};
-
+                noter.addEventListener('transitionend', () => {
+                    document.getElementById('writer_title').focus();
+                }, {once: true});
                 blocker.classList.add('active');
                 break;
+
             case "controller_sticker":
                 sticker.classList.add('show');
-                
-	        sticker.ontransitionend = () => {
-		   document.getElementById('master_sticker__title').focus();
-		}
-
+                sticker.addEventListener('transitionend', () => {
+                    document.getElementById('master_sticker__title').focus();
+                }, {once: true});
 	        blocker.classList.add('active');
                 break;
+
             case "controller_cleaner":
                 if(confirm("Are you sure?")) {
                     dispatch(updateNotesData([]));
@@ -43,8 +41,9 @@ export default function Controller() {
                 }
                 break;
         }
+
         controller.classList.toggle('closed');
-    }
+    };
         
     return (
         <div id="controller" className="closed" onClick={mainHandler}>
@@ -59,5 +58,5 @@ export default function Controller() {
                 <img src={TrashIcon} alt="trash-icon" />
             </button>
         </div>
-    )
+    );
 }

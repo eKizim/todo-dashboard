@@ -1,10 +1,11 @@
 :root {
 	/*Color palette*/
-	--main-bg-color: #0c0c13;
-	--field-bg-color: #242433;
-	--dinamic-item: #d8d8d8;
-	--dinamic-item-hover: #f7f7f7;
+	--main-bg-color: #1f1f28;
+	--field-bg-color: #7e7e80;
+	--dinamic-item: #e9e9e9;
+	--dinamic-item-hover: #f9f9f9;
 }
+
 
 * {
 	margin: 0;

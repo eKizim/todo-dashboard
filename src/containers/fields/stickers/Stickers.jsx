@@ -14,7 +14,7 @@ export default function Stickers() {
 		
 		document.getElementById('modal_fields').classList.add('active');
         document.getElementById('master_sticker').classList.add('show');
-	}
+	};
 
 	const deleteSticker = (_target) => {
 		let rSticker = _target.closest('.sticker_unit');
@@ -26,7 +26,7 @@ export default function Stickers() {
 		filteredData.forEach(sticker => sticker.unitId = filteredData.indexOf(sticker) + 1);
 		
 		dispatch(updateStickersData(filteredData));
-	}
+	};
 
 	const eventHandler = (e) => {
 		switch(e.target.className) {
@@ -37,7 +37,7 @@ export default function Stickers() {
 				deleteSticker(e.target);
 				break;
 		}
-	}
+	};
 
 	const renderedStickers = stickersData.map(sticker => <StickerUnit key={sticker.unitId} unitId={sticker.unitId} unitTitle={sticker.unitTitle} unitDate={sticker.unitDate}/>);
 
@@ -45,6 +45,6 @@ export default function Stickers() {
 		<div id="stickers" onClick={eventHandler}>
 			{renderedStickers}
 		</div>
-	)
+	);
 }
 

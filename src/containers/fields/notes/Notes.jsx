@@ -14,7 +14,7 @@ export default function Notes() {
 		
 		document.getElementById('modal_fields').classList.add('active');
 		document.getElementById('noter').classList.add('show');
-	}
+	};
 
 	const deleteNote = (_target) => {
 		let rNote = _target.closest('.note_unit');
@@ -26,7 +26,7 @@ export default function Notes() {
 		filteredData.forEach(note => note.unitId = filteredData.indexOf(note) + 1);
 		
 		dispatch(updateNotesData(filteredData));
-	}
+	};
 
 	const eventHandler = (e) => {
 		switch(e.target.className) {
@@ -37,7 +37,7 @@ export default function Notes() {
 				deleteNote(e.target);
 				break;
 		}
-	}
+	};
 
 	const renderedNotes = notesData.map(note => <NoteUnit key={note.unitId} unitId={note.unitId} unitTitle={note.unitTitle} unitDate={note.unitDate}/>);
 
@@ -45,5 +45,5 @@ export default function Notes() {
 		<div id="notes" onClick={eventHandler}>
 			{renderedNotes}
 		</div>
-	)
+	);
 };
