@@ -1,0 +1,111 @@
+.master_sticker {
+    width: 400px;
+    height: 400px;
+    padding: 15px;
+    position: absolute;
+    top: -330px;
+    left: -330px;
+
+    border-radius: 10px;
+    background-color: var(--dinamic-item);
+    opacity: .5;
+    transition: .2s;
+    overflow-y: auto;
+    pointer-events: none;
+}
+
+.master_sticker.show {
+    top: 100px;
+    left: 50px;
+    opacity: 1;
+    pointer-events: all;
+    box-shadow: 5px 5px 10px black;
+}
+
+@media screen and (max-width: 992px) {
+    .master_sticker {
+
+        margin: auto;
+        position: relative;
+        left: 0;
+        visibility: hidden;
+    }
+    .master_sticker.show {
+        left: 0;
+        visibility: visible;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .master_sticker {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+.sticker_buttons {
+    position: absolute;
+    right: 10px;
+}
+
+.sticker_buttons img {
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+
+.sticker_close, .sticker_done {
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.master_sticker input {
+    background-color: var(--modal-field-color);
+    border: none;
+    border-bottom: solid 2px var(--field-bg-color);
+    outline: none;
+}
+
+.master_sticker__title {
+    max-width: 300px;
+    width: 60%;
+    margin-bottom: 20px;
+
+    font-size: 18px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.master_sticker__list {
+    max-height: 275px;
+    list-style: inside;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.task {
+    margin-bottom: 5px;
+    font-size: 16px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    cursor: pointer;
+    transition: .1s;
+}
+
+.task.done {
+    text-decoration: line-through;
+}
+
+.sticker_task-input {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}

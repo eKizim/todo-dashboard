@@ -4,7 +4,9 @@ This is simple app for notes taking and stickers creating. Built with React and 
 
 ## Screenshots
 ![Main Screen](./main_screen.png)
+
 ![Noter](./noter.png)
+
 ![Master Sticker](./master_sticker.png)
 
 ## Usage

@@ -1,0 +1,40 @@
+.reader {
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reader_title {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+
+    border: none;
+    color: black;
+    background-color: transparent;
+    border-bottom: solid 2px var(--field-bg-color);
+    font-size: 21px;
+}
+
+.reader_text {
+    width: 100%;
+    height: 450px;
+    padding: 10px 10px;
+
+    border: none;
+    color: black;
+    background-color: var(--dinamic-item);
+    font-size: 16px;
+    outline: none;
+    overflow-y: auto;
+    word-wrap: break-word;
+    hyphens: auto;
+    resize: none;
+}

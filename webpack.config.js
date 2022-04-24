@@ -6,8 +6,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: 'development',
-  
-  entry: './src/index.jsx',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -54,5 +53,3 @@ module.exports = {
     new MiniCssExtractPlugin()
   ]
 }
-
-
